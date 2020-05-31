@@ -1,56 +1,57 @@
 import React from 'react';
  
-function Buttons() {
-    var musicList = []
-    var url = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=20&disabletoc=1&origin=*&"
+function Buttons(props) {
+    const {knownMusicClues, setKnownMusicClues, musicList, setMusicList} = props;
+    const {movieList, knownMovieClues, setKnownMovieClues, setMovieList} = props;
+    const {gameList, knownGameClues, setKnownGameClues, setGameList} = props;
+    const {eventList, knownEventClues, setKnownEventClues, setEventList} = props;
 
     const getSong = () => {
         console.log("GETTING SONG...")
-        var musicUrl = url + "page=2004_in_music";
-        
-        var parser = new DOMParser();
-        var htmldoc
-        fetch(musicUrl).then(
-            function(response) {
-              if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
-                  response.status);
-                return;
-              }
-        
-              // Examine the text in the response
-              response.json().then(function(data) {
-                console.log(data['parse']["text"]["*"]);
-                htmldoc = parser.parseFromString(data['parse']["text"]["*"],'text/html');
-                var all = htmldoc.querySelectorAll("li");
-                for(let i=0; i<all.length;i++){
-                    musicList.push(all[i]["innerText"]);
-                }
-                console.log(musicList);
-                let rand = Math.floor(Math.random() * musicList.length);
-                console.log(musicList[rand]);
-                
-              });
-            }
-        )
-
-          
+        let rand = Math.floor(Math.random() * musicList.length);
+        let song = musicList[rand];
+        var newClues = [...knownMusicClues, song]
+        setKnownMusicClues(newClues);
+        var updatedList = [...musicList];
+        updatedList.splice(rand,1);
+        setMusicList(updatedList);
     }
 
     const getMovie = () => {
         console.log("GETTING MOVIE...")
+        let rand = Math.floor(Math.random() * movieList.length);
+        let movie = movieList[rand];
+        var newClues = [...knownMovieClues, movie]
+        setKnownMovieClues(newClues);
+        var updatedList = [...movieList];
+        updatedList.splice(rand,1);
+        setMovieList(updatedList);
     }
 
     const getGame = () => {
         console.log("GETTING GAME...")
+        let rand = Math.floor(Math.random() * gameList.length);
+        let game = gameList[rand];
+        var newClues = [...knownGameClues, game]
+        setKnownGameClues(newClues);
+        var updatedList = [...gameList];
+        updatedList.splice(rand,1);
+        setGameList(updatedList);
     }
 
     const getEvent = () => {
         console.log("GETTING EVENT...")
+        let rand = Math.floor(Math.random() * eventList.length);
+        let event = eventList[rand];
+        var newClues = [...knownEventClues, event]
+        setKnownEventClues(newClues);
+        var updatedList = [...eventList];
+        updatedList.splice(rand,1);
+        setEventList(updatedList);
     }
 
     return(
-        <div>
+        <div style={{textAlign:"center"}}>
             <button onClick={getSong}>Get Song</button>
             <button onClick={getMovie}>Get Movie</button>
             <button onClick={getGame}>Get Game</button>

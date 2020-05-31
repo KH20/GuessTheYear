@@ -1,0 +1,48 @@
+.clues{
+    margin-top: 2em;
+    display:flex;
+    flex-wrap: wrap;
+    text-align: center;
+    background-color: red;
+    justify-content: center;
+}
+
+.music{
+    background-color: rgb(197, 38, 197);
+    min-width: 20%;
+    max-width: 20%;
+    margin-left:0.5em;
+    margin-right:0.5em;
+    flex-wrap: wrap;
+}
+
+.movies{
+    background-color: aqua;
+    min-width: 20%;
+    max-width: 20%;
+    margin-left:0.5em;
+    margin-right:0.5em;
+}
+
+.games{
+    background-color: yellow;
+    min-width: 20%;
+    max-width: 20%;
+    margin-left:0.5em;
+    margin-right:0.5em;
+}
+
+.events{
+    background-color: forestgreen;
+    min-width: 20%;
+    max-width: 20%;
+    margin-left:0.5em;
+    margin-right:0.5em;
+}
+
+ol{
+    text-align: center;
+    padding-left: 0;
+    margin-left: 2em;
+    margin-right: 2em;
+}
