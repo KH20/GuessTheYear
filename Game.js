@@ -50,6 +50,7 @@ function Game() {
                 setEventList={setEventList}
                 knownEventClues={knownEventClues}
                 setKnownEventClues={setKnownEventClues}
+                year={year}
             />
             <Clues knownMusicClues={knownMusicClues} knownMovieClues={knownMovieClues} knownGameClues={knownGameClues} knownEventClues={knownEventClues}/>
         </div>
