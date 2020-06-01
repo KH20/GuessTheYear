@@ -3,6 +3,8 @@ import Input from "./Input";
 import Buttons from './Buttons';
 import Clues from './Clues';
 import "./css/Buttons.css";
+import "./css/Game.css";
+
 
 
 
