@@ -38,7 +38,7 @@ function Clues(props) {
                     <div className="game-clues">
                         <ol>                    
                             {knownGameClues.map((clue, index) => (
-                                <a href={"http://www.google.com/search?q=" + clue + " IMDB&btnI"} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
+                                <a href={"http://www.google.com/search?q=" + clue + " Game&btnI"} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
                             ))}
                         </ol>
                     </div>

@@ -3,12 +3,11 @@
     display:flex;
     flex-wrap: wrap;
     text-align: center;
-    background-color: red;
     justify-content: center;
+    color:white;
 }
 
 .music{
-    background-color: rgb(197, 38, 197);
     min-width: 20%;
     max-width: 20%;
     margin-left:0.5em;
@@ -16,28 +15,124 @@
     flex-wrap: wrap;
 }
 
+.music-clues-container{
+    background-color: #457B9D;
+    min-width: 100%;
+    margin-left:0;
+    margin-right:0;
+    flex-wrap: wrap;
+    padding-top:0.01em;
+    padding-bottom:0.01em;
+}
+
+.movie-clues-container{
+    background-color: #457B9D;
+    min-width: 100%;
+    margin-left:0;
+    margin-right:0;
+    flex-wrap: wrap;
+    padding-top:0.01em;
+    padding-bottom:0.01em;
+}
+
+.game-clues-container{
+    background-color: #457B9D;
+    min-width: 100%;
+    margin-left:0;
+    margin-right:0;
+    flex-wrap: wrap;
+    padding-top:0.01em;
+    padding-bottom:0.01em;
+}
+
+.event-clues-container{
+    background-color: #457B9D;
+    min-width: 100%;
+    margin-left:0;
+    margin-right:0;
+    flex-wrap: wrap;
+    padding-top:0.01em;
+    padding-bottom:0.01em;
+}
+
+.music-clues{
+    background-color: #457B9D;
+}
+
+.movie-clues{
+    background-color: #457B9D;
+}
+
+.game-clues{
+    background-color: #457B9D;
+}
+
+.event-clues{
+    background-color: #457B9D;
+}
+
+.clue{
+    background-color: #A31420;
+    border-radius: 0.7em;
+    list-style: none;
+    margin-bottom:1.3em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-top:1em;
+    -webkit-box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
+    box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
+}
+
 .movies{
-    background-color: aqua;
+    background-color: #1D3557;
     min-width: 20%;
     max-width: 20%;
     margin-left:0.5em;
     margin-right:0.5em;
+    height: 100%;
+}
+
+.movie-clues{
+    background-color: #457B9D;
+    min-width: 100%;
+    margin-left:0;
+    margin-right:0;
+    flex-wrap: wrap;
 }
 
 .games{
-    background-color: yellow;
+    background-color: #1D3557;
     min-width: 20%;
     max-width: 20%;
     margin-left:0.5em;
     margin-right:0.5em;
+    height: 100%;
+}
+
+.game-clues{
+    background-color: #457B9D;
+    min-width: 100%;
+    margin-left:0;
+    margin-right:0;
+    flex-wrap: wrap;
 }
 
 .events{
-    background-color: forestgreen;
+    background-color: #1D3557;
     min-width: 20%;
     max-width: 20%;
     margin-left:0.5em;
     margin-right:0.5em;
+    height: 100%;
+}
+
+.event-clues{
+    background-color: #457B9D;
+    min-width: 100%;
+    margin-left:0;
+    margin-right:0;
+    flex-wrap: wrap;
 }
 
 ol{
@@ -45,4 +140,24 @@ ol{
     padding-left: 0;
     margin-left: 2em;
     margin-right: 2em;
+    margin-bottom:0;
+    margin-top:0;
+    padding-top:0;
+}
+
+li{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+h2{
+    background-color: #1D3557;
+    padding-top:1em;
+    padding-bottom:1em;
+    margin:0;
+}
+
+a{
+    text-decoration: none;
+    color:white;
 }
