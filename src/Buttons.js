@@ -6,6 +6,7 @@ function Buttons(props) {
     const {gameList, knownGameClues, setKnownGameClues, setGameList} = props;
     const {eventList, knownEventClues, setKnownEventClues, setEventList} = props;
     const {year} = props;
+    const {loaded} = props;
 
     const getSong = () => {
         console.log("GETTING SONG...")
@@ -53,10 +54,10 @@ function Buttons(props) {
 
     return(
         <div style={{textAlign:"center"}}>
-            <button onClick={getSong} disabled={year === ""}>Get Song</button>
-            <button onClick={getMovie} disabled={year === ""}>Get Movie</button>
-            <button onClick={getGame} disabled={year === ""}>Get Game</button>
-            <button onClick={getEvent} disabled={year === ""}>Get Event</button>
+            <button onClick={getSong} disabled={year === "" || loaded===true}>Get Song</button>
+            <button onClick={getMovie} disabled={year === "" || loaded===true}>Get Movie</button>
+            <button onClick={getGame} disabled={year === "" || loaded===true}>Get Game</button>
+            <button onClick={getEvent} disabled={year === "" || loaded===true}>Get Event</button>
         </div>
     ) 
 }

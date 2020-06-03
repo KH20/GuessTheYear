@@ -19,6 +19,7 @@ function Game() {
     const [eventList, setEventList] = useState([]);
     const [knownEventClues, setKnownEventClues] = useState([]);
     const [year, setYear] = useState("");
+    const [loaded, setLoaded] = useState(false);
     return(
         <div>
             <Input 
@@ -32,6 +33,8 @@ function Game() {
                 setGameList={setGameList}
                 eventList={eventList}
                 setEventList={setEventList}
+                loaded={loaded}
+                setLoaded={setLoaded}
             />
             <Buttons 
                 musicList={musicList} 
@@ -51,6 +54,7 @@ function Game() {
                 knownEventClues={knownEventClues}
                 setKnownEventClues={setKnownEventClues}
                 year={year}
+                loaded={loaded}
             />
             <Clues knownMusicClues={knownMusicClues} knownMovieClues={knownMovieClues} knownGameClues={knownGameClues} knownEventClues={knownEventClues}/>
         </div>

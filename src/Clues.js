@@ -7,7 +7,7 @@ function Clues(props) {
     return(
         <div className="clues">
             <div className="music">
-                <h2>Music Clues</h2>
+                <h2 id="music-header">Music Clues</h2>
                 <div className="music-clues-container">
                     <div className="music-clues">
                         <ol>                    
@@ -20,12 +20,12 @@ function Clues(props) {
             </div>
 
             <div className="movies">
-                <h2>Movie Clues</h2>
+                <h2 id="movie-header">Movie Clues</h2>
                 <div className="movie-clues-container">
                     <div className="movie-clues">
                         <ol>                    
                             {knownMovieClues.map((clue, index) => (
-                                <div className="clue"><li key={index}>{clue}</li></div>
+                                <a href={"http://www.google.com/search?q=" + clue + " IMDB&btnI"} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
                             ))}
                         </ol>
                     </div>
@@ -33,12 +33,12 @@ function Clues(props) {
             </div>
 
             <div className="games">
-                <h2>Game Clues</h2>
+                <h2 id="game-header">Game Clues</h2>
                 <div className="game-clues-container">
                     <div className="game-clues">
                         <ol>                    
                             {knownGameClues.map((clue, index) => (
-                                <div className="clue"><li key={index}>{clue}</li></div>
+                                <a href={"http://www.google.com/search?q=" + clue + " IMDB&btnI"} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
                             ))}
                         </ol>
                     </div>
@@ -46,12 +46,12 @@ function Clues(props) {
             </div>
 
             <div className="events">
-                <h2>Event Clues</h2>
+                <h2 id="event-header">Event Clues</h2>
                 <div className="event-clues-container">
                     <div className="event-clues">
                         <ol>                    
                             {knownEventClues.map((clue, index) => (
-                                <a href={"http://www.google.com/search?q=" + {clue} + "youtube&btnI"}><div className="clue"><li key={index}>{clue}</li></div></a>
+                                <a href={"http://www.google.com/search?q=" + clue} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
                             ))}
                         </ol>
                     </div>
