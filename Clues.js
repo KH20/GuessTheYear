@@ -20,7 +20,7 @@ function Clues(props) {
             </div>
 
             <div className="movies">
-                <h2 id="movie-header">Movie Clues</h2>
+                <h2 id="movie-header">Movie / TV Clues</h2>
                 <div className="movie-clues-container">
                     <div className="movie-clues">
                         <ol>                    

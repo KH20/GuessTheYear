@@ -63,7 +63,6 @@ function Input(props) {
         "2019"
       ]
 
-
     const getMusic = async(year) =>{
         const musicYearUrl = "https://cors-anywhere.herokuapp.com/https://www.google.com/search?&origin=*&q=list+of+songs+";
         
@@ -205,7 +204,6 @@ function Input(props) {
         
         e.preventDefault();
         setYear(input);
-
         handleListPopulation(input);
         console.log(input);
         console.log(musicList);
@@ -218,10 +216,8 @@ function Input(props) {
                 {loaded && <Loader type="TailSpin" color="#1D3557"/>}
                 <div className="loading-status">{loadingStatus}</div>
             </div>
-
-            Year: 
-            <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)}></input>
-            <button onClick={handleYearSubmit}>Submit</button>            
+            <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
+            <button id="submit-button" onClick={handleYearSubmit}>Submit</button>            
         </div>
     ) 
 }

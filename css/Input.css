@@ -11,3 +11,14 @@
 .loading-status{
     margin-top:1em;
 }
+
+input[type=text] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 0.5em;
+}
+
+#submit-button{
+    padding: 0.9em 1em;
+}
