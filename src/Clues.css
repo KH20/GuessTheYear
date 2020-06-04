@@ -85,6 +85,7 @@
 }
 
 .movies{
+    background-color: #1D3557;
     min-width: 20%;
     max-width: 20%;
     margin-left:0.5em;
@@ -101,6 +102,7 @@
 }
 
 .games{
+    background-color: #1D3557;
     min-width: 20%;
     max-width: 20%;
     margin-left:0.5em;
@@ -117,6 +119,7 @@
 }
 
 .events{
+    background-color: #1D3557;
     min-width: 20%;
     max-width: 20%;
     margin-left:0.5em;
@@ -152,8 +155,6 @@ h2{
     padding-top:1em;
     padding-bottom:1em;
     margin:0;
-    border-top-left-radius:1em;
-    border-top-right-radius:1em;
 }
 
 a{
