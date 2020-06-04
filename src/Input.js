@@ -211,13 +211,15 @@ function Input(props) {
 
     return(
         <div>
-
             <div className="loading-overlay">
                 {loaded && <Loader type="TailSpin" color="#1D3557"/>}
                 <div className="loading-status">{loadingStatus}</div>
             </div>
-            <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
-            <button id="submit-button" onClick={handleYearSubmit}>Submit</button>            
+            <div className="year-input">
+                <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
+                <button id="submit-button" onClick={handleYearSubmit}>Submit</button>   
+            </div>
+         
         </div>
     ) 
 }

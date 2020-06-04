@@ -53,7 +53,7 @@ function Buttons(props) {
     }
 
     return(
-        <div style={{textAlign:"center"}}>
+        <div className="buttons-container">
             <button onClick={getSong} disabled={year === "" || loaded===true}>Get Song</button>
             <button onClick={getMovie} disabled={year === "" || loaded===true}>Get Movie</button>
             <button onClick={getGame} disabled={year === "" || loaded===true}>Get Game</button>
