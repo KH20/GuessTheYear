@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
+import Loader from 'react-loader-spinner';
+import "./css/Input.css";
 
 function Input(props) {
     const {setYear, musicList, setMusicList} = props;
     const {movieList, setMovieList} = props;
     const {gameList, setGameList} = props;
     const {eventList, setEventList} = props;
+    const {loaded, setLoaded} = props;
     const [input, setInput] = useState("");
+    const [loadingStatus, setLoadingStatus] = useState("");
     const years = [
         "1970",
         "1971",
@@ -59,13 +63,110 @@ function Input(props) {
         "2019"
       ]
 
-    const handleYearSubmit = (e) =>{
-        e.preventDefault();
-        setYear(input);
-        handleListPopulation(input);
-        console.log(input);
-        console.log(musicList);
+    const getMusic = async(year) =>{
+        const musicYearUrl = "https://cors-anywhere.herokuapp.com/https://www.google.com/search?&origin=*&q=list+of+songs+";
+        
+        const musicUrl = musicYearUrl + year;
+        // console.log("Retrieving Music...");
+        const data = await fetch(musicUrl);
+        return data.text();
     }
+
+    const getMovies = async(year) =>{
+        const movieYearUrl = "https://cors-anywhere.herokuapp.com/https://www.imdb.com/search/title/?year=" + year + "-01-01," + year + "-12-31&view=simple";
+        const movieUrl = movieYearUrl;
+        // console.log("Retrieving Movies...");
+        const data = await fetch(movieUrl);
+        return data.text();
+    }
+
+    const getGames = async(year) =>{
+        const gameUrl = "https://cors-anywhere.herokuapp.com/https://www.imdb.com/search/title/?title_type=video_game&year=" + year + "-01-01," + year + "-12-31&view=simple";
+        // console.log("Retrieving Games...");
+        const data = await fetch(gameUrl);
+        return data.text();
+    }
+
+    const getEvents = async(year) =>{
+        const eventUrl = "https://cors-anywhere.herokuapp.com/https://www.onthisday.com/events/date/" + year;
+        // console.log("Retrieving Events...");
+        const data = await fetch(eventUrl);
+        return data.text();
+    }
+
+    const populateMusic = async (year) =>{
+        const parser = new DOMParser();
+        setLoadingStatus("Populating Music...");
+        const data = await getMusic(year);
+        const htmldoc = parser.parseFromString(data,'text/html');
+        const all = htmldoc.querySelectorAll(".rlc__slider-page div a .title, .rlc__slider-page div a span:nth-of-type(1)");
+        for(let i=0; i<all.length/2;i+=2){
+            let song = all[i]["innerText"];
+            let artist = all[i+1]["innerText"];
+            musicList.push(artist + " - " + song);
+        }
+        setMusicList(musicList);   
+        if(data)
+            return true;        
+    };
+
+
+    async function populateMovies(year){
+        const parser = new DOMParser();
+        setLoadingStatus("Populating Movies...");
+        const data = await getMovies(year);
+        console.log(data);
+        var htmldoc = parser.parseFromString(data,'text/html');
+        const all = htmldoc.querySelectorAll(".col-title span a");
+        for(let i=1; i<all.length;i++){
+            if(i > 50){
+                break;
+            }
+            let col = all[i];
+            var title = col["innerText"];
+            movieList.push(title);
+        }
+        setMovieList(movieList);
+        if(data)
+            return true;
+    };
+
+    async function populateGames(year){
+        const parser = new DOMParser();
+        setLoadingStatus("Populating Games...");
+        const data = await getGames(year);
+        var htmldoc = parser.parseFromString(data,'text/html');
+        const all = htmldoc.querySelectorAll(".col-title span a");
+
+        for(let i=1; i<all.length;i++){
+            if(i > 50){
+                break;
+            }
+            let col = all[i];
+            var title = col["innerText"];
+            gameList.push(title);
+        }
+        setGameList(gameList);
+        if(data)
+            return true;
+    };   
+
+    async function populateEvents(year){
+        const parser = new DOMParser();
+        setLoadingStatus("Populating Events...");
+        const data = await getEvents(year);
+        var htmldoc = parser.parseFromString(data,'text/html');
+        const all = htmldoc.querySelectorAll(".event, .section--highlight .wrapper .grid .grid__item p");
+        for(let i=1; i<all.length;i++){
+            let col = all[i];
+            var title = col["innerText"];
+            eventList.push(title);
+        }
+        setEventList(eventList);
+        if(data)
+            return true;
+    };
+
 
     const randYearGen = () => {
         const rand = Math.floor(Math.random() * 51);
@@ -73,179 +174,50 @@ function Input(props) {
         return years[rand];
     }
 
-    const populateMusic = (year) => {
-        let musicYearUrl = "";
-        let intyear = parseInt(year);
-        if(intyear > 1958){
-            musicYearUrl = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&disabletoc=1&origin=*&page=Billboard_Year-End_Hot_100_singles_of_";
-        }
-        else{
-            musicYearUrl = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&disabletoc=1&origin=*&page=Billboard_year-end_top_50_singles_of_"
-        }
-         
-        const musicUrl = musicYearUrl + year;
-        console.log(musicUrl);
-        const parser = new DOMParser();
-        console.log("Populating music...")
+    const handleListPopulation = async (year) => {
 
-        var htmldoc;
-        fetch(musicUrl).then(
-            function(response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' +
-                        response.status + ". SONGS");
-                    return;
-                }
-                response.json().then(function(data) {
-                    console.log(data['parse']["text"]["*"]);
-                    htmldoc = parser.parseFromString(data['parse']["text"]["*"],'text/html');
-                    const all = htmldoc.querySelectorAll(".wikitable tbody tr");
-                    console.log("-------------------")
-                    console.log(all);
-                    for(let i=1; i<50;i++){
-                        let songInfo = all[i]["cells"];
-                        var song = "";
-                        var artist = "";
-                        if(songInfo.length<3){
-                            song = songInfo[0]["innerText"];
-                            artist = songInfo[1]["innerText"];
-                        }else{
-                            song = songInfo[1]["innerText"];
-                            artist = songInfo[2]["innerText"];
-                        }
-
-                        musicList.push(artist + " - " + song);
-                    }
-                    setMusicList(musicList);           
-                });
-            }
-        )
-    }
-
-    const populateMovies = (year) => {
-        // const movieYearUrl = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=2&disabletoc=1&origin=*&page="
-        // const movieUrl = movieYearUrl + year + "_in_film";
-        // console.log(movieUrl);
-        const movieYearUrl = "https://cors-anywhere.herokuapp.com/https://www.boxofficemojo.com/year/world/";
-        const movieUrl = movieYearUrl + year;
-
-        const parser = new DOMParser();
-        // console.log("Populating movies...")
-
-        var htmldoc;
-        fetch(movieUrl).then(
-            function(response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' +
-                        response.status + ". MOVIES");
-                    return;
-                }
-                response.text().then(function(data) {
-                    // console.log(data);
-                    // console.log(data['parse']["text"]["*"]);
-                    htmldoc = parser.parseFromString(data,'text/html');
-                    // htmldoc = parser.parseFromString(data['parse']["text"]["*"],'text/html');
-                    const all = htmldoc.querySelectorAll(".mojo-body-table tr");
-                    console.log(all);
-                    for(let i=1; i<50;i++){
-                        let movieInfo = all[i]["cells"];
-                        var title = movieInfo[1]["innerText"];
-                        movieList.push(title);
-                    }
-                    setMovieList(movieList);
-                });
-            }
-        )
-    }
-
-    const populateGames = (year) => {
-
-        const gameUrl = "https://cors-anywhere.herokuapp.com/https://www.imdb.com/search/title/?title_type=video_game&year=" + year + "-01-01," + year + "-12-31&view=simple";
-
-        const parser = new DOMParser();
-        // console.log("Populating movies...")
-
-        var htmldoc;
-        fetch(gameUrl).then(
-            function(response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' +
-                        response.status + ". GAMES");
-                    return;
-                }
-                response.text().then(function(data) {
-                    htmldoc = parser.parseFromString(data,'text/html');
-
-                    const all = htmldoc.querySelectorAll(".col-title span a");
-                    console.log(all);
-                    for(let i=1; i<all.length;i++){
-                        if(i > 50){
-                            break;
-                        }
-                        let col = all[i];
-                        var title = col["innerText"];
-                        gameList.push(title);
-                    }
-                    setGameList(gameList);
-
-                });
-            }
-        )
-    }
-
-    const populateEvents = (year) => {
-
-        const eventUrl = "https://cors-anywhere.herokuapp.com/https://www.onthisday.com/events/date/" + year;
-
-        const parser = new DOMParser();
-        // console.log("Populating movies...")
-
-        var htmldoc;
-        fetch(eventUrl).then(
-            function(response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' +
-                        response.status + ". EVENTS");
-                    return;
-                }
-                response.text().then(function(data) {
-                    htmldoc = parser.parseFromString(data,'text/html');
-
-                    const all = htmldoc.querySelectorAll(".event, .section--highlight .wrapper .grid .grid__item p");
-                    console.log("EVENTS");
-                    console.log(all);
-                    for(let i=1; i<all.length;i++){
-                        let col = all[i];
-                        
-                        var title = col["innerText"];
-                        eventList.push(title);
-                    }
-                    setEventList(eventList);
-
-                });
-            }
-        )
-    }
-
-    const handleListPopulation = (year) => {
+        let musicLoaded = false;
+        let gamesLoaded = false;
+        let moviesLoaded = false;
+        let eventsLoaded = false;
 
         if(year === ""){
             year = randYearGen();
             setYear(year);
         }
 
-        populateMusic(year); 
-        populateMovies(year);
-        populateGames(year);
-        populateEvents(year);
+        setLoaded(true);
+
+        musicLoaded = await populateMusic(year); 
+        moviesLoaded = await populateMovies(year);
+        gamesLoaded = await populateGames(year);
+        eventsLoaded = await populateEvents(year);
+
+        if(musicLoaded && gamesLoaded && moviesLoaded && eventsLoaded){
+            setLoaded(false);
+            setLoadingStatus("");
+        }
+
     }
 
+    const handleYearSubmit = (e) =>{
+        
+        e.preventDefault();
+        setYear(input);
+        handleListPopulation(input);
+        console.log(input);
+        console.log(musicList);
+    }
 
     return(
         <div>
-            Year: 
-            <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)}></input>
-            <button onClick={handleYearSubmit}>Submit</button>
+
+            <div className="loading-overlay">
+                {loaded && <Loader type="TailSpin" color="#1D3557"/>}
+                <div className="loading-status">{loadingStatus}</div>
+            </div>
+            <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
+            <button id="submit-button" onClick={handleYearSubmit}>Submit</button>            
         </div>
     ) 
 }
