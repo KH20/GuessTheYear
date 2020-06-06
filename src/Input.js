@@ -61,12 +61,15 @@ function Input(props) {
         "2017",
         "2018",
         "2019"
-      ]
+      ];
 
     const getMusic = async(year) =>{
+        
+        const filters = document.querySelector("input[name='music-type']:checked");
+        const filter = filters.value;
         const musicYearUrl = "https://cors-anywhere.herokuapp.com/https://www.google.com/search?&origin=*&q=list+of+songs+";
         
-        const musicUrl = musicYearUrl + year;
+        const musicUrl = musicYearUrl + filter + "+" + year;
         // console.log("Retrieving Music...");
         const data = await fetch(musicUrl);
         return data.text();
@@ -217,9 +220,15 @@ function Input(props) {
             </div>
             <div className="year-input">
                 <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
-                <button id="submit-button" onClick={handleYearSubmit}>Submit</button>   
+                <button id="submit-button" onClick={handleYearSubmit}>Submit</button>       
             </div>
-         
+            <div style={{textAlign:"center"}}>
+                <input type="radio" name="music-type" value="" defaultChecked/>All
+                <input type="radio" name="music-type" value="rock"/>Rock
+                <input type="radio" name="music-type" value="pop"/>Pop
+                <input type="radio" name="music-type" value="metal"/>Metal
+            </div>
+
         </div>
     ) 
 }
