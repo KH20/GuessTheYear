@@ -86,22 +86,6 @@
     box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
 }
 
-.music-clues{
-    background-color: #457B9D;
-}
-
-.movie-clues{
-    background-color: #457B9D;
-}
-
-.game-clues{
-    background-color: #457B9D;
-}
-
-.event-clues{
-    background-color: #457B9D;
-}
-
 .clue{
     background-color: #A31420;
     border-radius: 0.7em;
@@ -115,30 +99,6 @@
     box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
     max-width: 14em;
     width: 14em;
-}
-
-.movie-clues{
-    background-color: #457B9D;
-    min-width: 100%;
-    margin-left:0;
-    margin-right:0;
-    flex-wrap: wrap;
-}
-
-.game-clues{
-    background-color: #457B9D;
-    min-width: 100%;
-    margin-left:0;
-    margin-right:0;
-    flex-wrap: wrap;
-}
-
-.event-clues{
-    background-color: #457B9D;
-    min-width: 100%;
-    margin-left:0;
-    margin-right:0;
-    flex-wrap: wrap;
 }
 
 ol{

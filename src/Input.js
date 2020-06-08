@@ -102,7 +102,7 @@ function Input(props) {
 
         var data = localStorage.getItem("music_" + year);
 
-        if(data === null){
+        if(data === null || data === ""){
             console.log("Data was null");
             data = await getMusic(year);
             const htmldoc = parser.parseFromString(data,'text/html');
@@ -132,7 +132,7 @@ function Input(props) {
 
         var data = localStorage.getItem("movies_" + year);
 
-        if(data === null){
+        if(data === null || data === ""){
             data = await getMovies(year);
             var htmldoc = parser.parseFromString(data,'text/html');
             const all = htmldoc.querySelectorAll(".col-title span a");
@@ -162,7 +162,7 @@ function Input(props) {
 
         var data = localStorage.getItem("games_" + year);
 
-        if(data === null){
+        if(data === null || data === ""){
             data = await getGames(year);
             var htmldoc = parser.parseFromString(data,'text/html');
             const all = htmldoc.querySelectorAll(".col-title span a");
