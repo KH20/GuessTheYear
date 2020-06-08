@@ -68,7 +68,6 @@ function Input(props) {
         const filters = document.querySelector("input[name='music-type']:checked");
         const filter = filters.value;
         const musicYearUrl = "https://cors-anywhere.herokuapp.com/https://www.google.com/search?&origin=*&q=list+of+songs+";
-        
         const musicUrl = musicYearUrl + filter + "+" + year;
         // console.log("Retrieving Music...");
         const data = await fetch(musicUrl);
@@ -100,36 +99,59 @@ function Input(props) {
     const populateMusic = async (year) =>{
         const parser = new DOMParser();
         setLoadingStatus("Populating Music...");
-        const data = await getMusic(year);
-        const htmldoc = parser.parseFromString(data,'text/html');
-        const all = htmldoc.querySelectorAll(".rlc__slider-page div a .title, .rlc__slider-page div a span:nth-of-type(1)");
-        for(let i=0; i<all.length/2;i+=2){
-            let song = all[i]["innerText"];
-            let artist = all[i+1]["innerText"];
-            musicList.push(artist + " - " + song);
+
+        var data = localStorage.getItem("music_" + year);
+
+        if(data === null){
+            console.log("Data was null");
+            data = await getMusic(year);
+            const htmldoc = parser.parseFromString(data,'text/html');
+            const all = htmldoc.querySelectorAll(".rlc__slider-page div a .title, .rlc__slider-page div a span:nth-of-type(1)");
+            for(let i=0; i<all.length/2;i+=2){
+                let song = all[i]["innerText"];
+                let artist = all[i+1]["innerText"];
+                musicList.push(artist + " - " + song);
+            }
+            localStorage.setItem("music_" + year, musicList);
+            setMusicList(musicList);
         }
-        setMusicList(musicList);   
+        else{
+            const arr = data.split(/(?=\S),(?=\S)/);
+            setMusicList(arr);
+        }
+
         if(data)
-            return true;        
+            return true;    
+            
     };
 
 
     async function populateMovies(year){
         const parser = new DOMParser();
         setLoadingStatus("Populating Movies...");
-        const data = await getMovies(year);
-        console.log(data);
-        var htmldoc = parser.parseFromString(data,'text/html');
-        const all = htmldoc.querySelectorAll(".col-title span a");
-        for(let i=1; i<all.length;i++){
-            if(i > 50){
-                break;
+
+        var data = localStorage.getItem("movies_" + year);
+
+        if(data === null){
+            data = await getMovies(year);
+            var htmldoc = parser.parseFromString(data,'text/html');
+            const all = htmldoc.querySelectorAll(".col-title span a");
+            for(let i=1; i<all.length;i++){
+                if(i > 50){
+                    break;
+                }
+                let col = all[i];
+                var title = col["innerText"];
+                movieList.push(title);
             }
-            let col = all[i];
-            var title = col["innerText"];
-            movieList.push(title);
+            localStorage.setItem("movies_" + year, movieList);
+            setMovieList(movieList);
         }
-        setMovieList(movieList);
+        else{
+            const arr = data.split(/(?=\S),(?=\S)/);
+            setMovieList(arr);
+        }
+
         if(data)
             return true;
     };
@@ -137,19 +159,29 @@ function Input(props) {
     async function populateGames(year){
         const parser = new DOMParser();
         setLoadingStatus("Populating Games...");
-        const data = await getGames(year);
-        var htmldoc = parser.parseFromString(data,'text/html');
-        const all = htmldoc.querySelectorAll(".col-title span a");
 
-        for(let i=1; i<all.length;i++){
-            if(i > 50){
-                break;
+        var data = localStorage.getItem("games_" + year);
+
+        if(data === null){
+            data = await getGames(year);
+            var htmldoc = parser.parseFromString(data,'text/html');
+            const all = htmldoc.querySelectorAll(".col-title span a");
+            for(let i=1; i<all.length;i++){
+                if(i > 50){
+                    break;
+                }
+                let col = all[i];
+                var title = col["innerText"];
+                gameList.push(title);
             }
-            let col = all[i];
-            var title = col["innerText"];
-            gameList.push(title);
+            localStorage.setItem("games_" + year, gameList);
+            setGameList(gameList);
         }
-        setGameList(gameList);
+        else{
+            const arr = data.split(/(?=\S),(?=\S)/);
+            setGameList(arr);
+        }
+
         if(data)
             return true;
     };   
@@ -157,15 +189,30 @@ function Input(props) {
     async function populateEvents(year){
         const parser = new DOMParser();
         setLoadingStatus("Populating Events...");
-        const data = await getEvents(year);
-        var htmldoc = parser.parseFromString(data,'text/html');
-        const all = htmldoc.querySelectorAll(".event, .section--highlight .wrapper .grid .grid__item p");
-        for(let i=1; i<all.length;i++){
-            let col = all[i];
-            var title = col["innerText"];
-            eventList.push(title);
+
+        var data = localStorage.getItem("events_" + year);
+
+        if(data === null || data === ""){
+            data = await getEvents(year);
+            var htmldoc = parser.parseFromString(data,'text/html');
+            const all = htmldoc.querySelectorAll(".event, .section--highlight .wrapper .grid .grid__item p");
+            console.log(all);
+            for(let i=1; i<all.length;i++){
+                if(i > 50){
+                    break;
+                }
+                let col = all[i];
+                var title = col["innerText"];
+                eventList.push(title);
+            }
+            localStorage.setItem("events_" + year, eventList);
+            setEventList(eventList);
         }
-        setEventList(eventList);
+        else{
+            const arr = data.split(/(?=\S),(?=\S)/);
+            setEventList(arr);
+        }
+
         if(data)
             return true;
     };
