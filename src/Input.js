@@ -11,16 +11,16 @@ function Input(props) {
     const [input, setInput] = useState("");
     const [loadingStatus, setLoadingStatus] = useState("");
     const years = [
-        "1970",
-        "1971",
-        "1972",
-        "1973",
-        "1974",
-        "1975",
-        "1976",
-        "1977",
-        "1978",
-        "1979",
+        // "1970",
+        // "1971",
+        // "1972",
+        // "1973",
+        // "1974",
+        // "1975",
+        // "1976",
+        // "1977",
+        // "1978",
+        // "1979",
         "1980",
         "1981",
         "1982",
@@ -63,12 +63,9 @@ function Input(props) {
         "2019"
       ];
 
-    const getMusic = async(year) =>{
-        
-        const filters = document.querySelector("input[name='music-type']:checked");
-        const filter = filters.value;
+    const getMusic = async(year, musicType) =>{
         const musicYearUrl = "https://cors-anywhere.herokuapp.com/https://www.google.com/search?&origin=*&q=list+of+songs+";
-        const musicUrl = musicYearUrl + filter + "+" + year;
+        const musicUrl = musicYearUrl + "+" + musicType + "+" + year;
         // console.log("Retrieving Music...");
         const data = await fetch(musicUrl);
         return data.text();
@@ -100,19 +97,25 @@ function Input(props) {
         const parser = new DOMParser();
         setLoadingStatus("Populating Music...");
 
-        var data = localStorage.getItem("music_" + year);
+        const filters = document.querySelector("input[name='music-type']:checked");
+        const filter = filters.value;
+        console.log("FILTER: " + filter);
+        var data = localStorage.getItem("music_" + filter + "_" + year);
 
         if(data === null || data === ""){
             console.log("Data was null");
-            data = await getMusic(year);
+            data = await getMusic(year, filter);
             const htmldoc = parser.parseFromString(data,'text/html');
             const all = htmldoc.querySelectorAll(".rlc__slider-page div a .title, .rlc__slider-page div a span:nth-of-type(1)");
             for(let i=0; i<all.length/2;i+=2){
                 let song = all[i]["innerText"];
                 let artist = all[i+1]["innerText"];
-                musicList.push(artist + " - " + song);
+                let artistSong = artist + " - " + song;
+                if(!musicList.includes(artistSong))
+                    musicList.push(artistSong);
             }
-            localStorage.setItem("music_" + year, musicList);
+            console.log("STATE: " + filter);
+            localStorage.setItem("music_" + filter + "_" + year, musicList);
             setMusicList(musicList);
         }
         else{
@@ -121,8 +124,7 @@ function Input(props) {
         }
 
         if(data)
-            return true;    
-            
+            return true;         
     };
 
 
@@ -261,21 +263,23 @@ function Input(props) {
 
     return(
         <div>
-            <div className="loading-overlay">
-                {loaded && <Loader type="TailSpin" color="#1D3557"/>}
-                <div className="loading-status">{loadingStatus}</div>
-            </div>
+
             <div className="year-input">
                 <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
                 <button id="submit-button" onClick={handleYearSubmit}>Submit</button>       
             </div>
+            <br/>
             <div style={{textAlign:"center"}}>
                 <input type="radio" name="music-type" value="" defaultChecked/>All
                 <input type="radio" name="music-type" value="rock"/>Rock
+                <input type="radio" name="music-type" value="hard rock"/>Hard Rock
                 <input type="radio" name="music-type" value="pop"/>Pop
                 <input type="radio" name="music-type" value="metal"/>Metal
             </div>
-
+            <div className="loading-overlay">
+                {loaded && <Loader type="TailSpin" color="#1D3557"/>}
+                <div className="loading-status">{loadingStatus}</div>
+            </div>
         </div>
     ) 
 }
