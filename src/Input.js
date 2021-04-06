@@ -3,13 +3,16 @@ import Loader from 'react-loader-spinner';
 import "./css/Input.css";
 
 function Input(props) {
-    const {setYear, musicList, setMusicList} = props;
+    const {musicList, setMusicList} = props;
     const {movieList, setMovieList} = props;
     const {gameList, setGameList} = props;
     const {eventList, setEventList} = props;
     const {loaded, setLoaded} = props;
+    const {year, setYear} = props;
     const [input, setInput] = useState("");
+    const [guess, setGuess] = useState("");
     const [loadingStatus, setLoadingStatus] = useState("");
+    const [win, setWin] = useState(false);
     const years = [
         // "1970",
         // "1971",
@@ -252,6 +255,15 @@ function Input(props) {
 
     }
 
+    const processGuess = (guess, year) => {
+        console.log("GUESS: " + guess);
+        console.log("YEAR: " + year);
+        if(guess === year){
+            console.log("YOU WIN!");
+            setWin(true);
+        }
+    }
+
     const handleYearSubmit = (e) =>{
         
         e.preventDefault();
@@ -266,7 +278,11 @@ function Input(props) {
 
             <div className="year-input">
                 <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
-                <button id="submit-button" onClick={handleYearSubmit}>Submit</button>       
+                <button id="submit-button" onClick={handleYearSubmit}>Get Clues!</button>       
+            </div>
+            <div className="guess-input">
+                <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
+                <button id="guess-button" onClick={() => processGuess(guess, year)}>Submit</button>       
             </div>
             <br/>
             <div style={{textAlign:"center"}}>
@@ -276,10 +292,12 @@ function Input(props) {
                 <input type="radio" name="music-type" value="pop"/>Pop
                 <input type="radio" name="music-type" value="metal"/>Metal
             </div>
+            {loaded === true ?
             <div className="loading-overlay">
                 {loaded && <Loader type="TailSpin" color="#1D3557"/>}
                 <div className="loading-status">{loadingStatus}</div>
-            </div>
+            </div>: ""}
+            {win === true ? <div className="win-banner">YOU WIN!</div> : ""}
         </div>
     ) 
 }
