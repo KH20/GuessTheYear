@@ -275,14 +275,10 @@ function Input(props) {
 
     return(
         <div>
-
+            
             <div className="year-input">
                 <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
                 <button id="submit-button" onClick={handleYearSubmit}>Get Clues!</button>       
-            </div>
-            <div className="guess-input">
-                <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
-                <button id="guess-button" onClick={() => processGuess(guess, year)}>Submit</button>       
             </div>
             <br/>
             <div style={{textAlign:"center"}}>
@@ -298,6 +294,10 @@ function Input(props) {
                 <div className="loading-status">{loadingStatus}</div>
             </div>: ""}
             {win === true ? <div className="win-banner">YOU WIN!</div> : ""}
+            <div className="guess-input">
+                <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
+                <button id="guess-button" onClick={() => processGuess(guess, year)}>Submit</button>       
+            </div>
         </div>
     ) 
 }
