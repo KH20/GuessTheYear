@@ -6,12 +6,34 @@
 
 .loading-overlay{
     position: absolute;
-    display:inline-block;
+    display: inline-block;
     margin: 0 auto;
+    margin-top: 0px;
+    margin-left: auto;
     z-index: 1;
-    width:99%;
-    margin-top:20em;
+    width: 50%;
+    margin-top: 20em;
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);;
+    padding: 4em 0em;
+    margin-left: 25%;
+    min-width: 40%;
+}
+
+.win-banner{
+    position: absolute;
+    display: inline-block;
+    margin: 0 auto;
+    margin-top: 0px;
+    margin-left: auto;
+    z-index: 1;
+    width: 50%;
+    margin-top: 20em;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 4em 0em;
+    margin-left: 25%;
+    min-width: 40%;
 }
 
 .loading-status{
@@ -26,8 +48,36 @@ input[type=text] {
     max-width: 10em;
 }
 
+#guess-button{
+    padding: 0.9em 1em;
+    background-color: orange;
+}
+
+.guess-input{
+    text-align: center;
+}
+
 #submit-button{
     padding: 0.9em 1em;
+}
+
+label{
+    color:grey;
+}
+
+button:disabled{
+    padding:2em;
+    border-radius: 0.5em;
+    margin-left: 1em;
+    margin-right:1em;
+    background-color: grey !important;
+    color:lightgrey;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+
 }
 
 @media only screen and (max-width:1100px){
