@@ -1,7 +1,21 @@
 import React, {useState} from 'react';
 import Loader from 'react-loader-spinner';
 import "./css/Input.css";
+import "./css/style.css";
 import jsonData from "./data/jsonData.json";
+import AWN from "awesome-notifications";
+
+let globalOptions =  {
+    durations:{
+        global: 2000
+    },
+    position:"top-right",
+    labels:{
+        alert: "Error"
+    }
+};
+let notifier = new AWN(globalOptions)
+
 
 function Input(props) {
     const {musicList, setMusicList} = props;
@@ -236,6 +250,9 @@ function Input(props) {
         if(guess === year){
             console.log("YOU WIN!");
             setWin(true);
+        }
+        else{
+            notifier.alert("Incorrect :(");
         }
     }
 
