@@ -306,7 +306,7 @@ function Input(props) {
 
     return(
         <div>
-            
+            <button id="options"><i class="fas fa-cog" id="options-icon"></i></button>
             <div className="year-input" onMouseEnter={showYearInputToolTip}>
                 <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year" ></input>
                 <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>       

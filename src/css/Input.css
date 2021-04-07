@@ -65,6 +65,27 @@ label{
     color:grey;
 }
 
+#options-icon{
+    font-size:x-large;
+}
+
+#options{
+    padding:0.5em;
+    border-radius: 0.5em;
+    margin-left: 1em;
+    margin-right:1em;
+    background-color: #1d3557;
+    color:white;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    min-width: 2em;
+    margin-left:88.5%;
+}
+
 button:disabled{
     padding:2em;
     border-radius: 0.5em;
