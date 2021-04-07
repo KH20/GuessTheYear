@@ -4,6 +4,8 @@ import "./css/Input.css";
 import "./css/style.css";
 import jsonData from "./data/jsonData.json";
 import AWN from "awesome-notifications";
+import tippy from "tippy.js";
+import 'tippy.js/dist/tippy.css';
 
 let globalOptions =  {
     durations:{
@@ -273,15 +275,44 @@ function Input(props) {
         setWin(false);
     }
 
+    const showYearInputToolTip = () => {
+        tippy('.year-input', {
+            content: "Leave the year blank for Single Player Mode",
+            hideOnClick: false,
+            duration:[100,250],
+            trigger: "mouseenter",
+        });
+    }
+
+    const showGuessInputTooltip = () => {
+        tippy('.guess-input', {
+            content: "Input your guess here",
+            hideOnClick: false,
+            duration:[100,250],
+            trigger: "mouseenter",
+            placement: "bottom"
+        });
+    }
+
+    const showGenreOptionsTooltip = () => {
+        tippy('#genre-options', {
+            content: "Genre options have been disabled temporarily",
+            hideOnClick: false,
+            duration:[100,250],
+            trigger: "mouseenter",
+            placement: "bottom"
+        });
+    }
+
     return(
         <div>
             
-            <div className="year-input">
-                <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
-                <button id="submit-button" onClick={handleYearSubmit}>Get Clues!</button>       
+            <div className="year-input" onMouseEnter={showYearInputToolTip}>
+                <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year" ></input>
+                <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>       
             </div>
             <br/>
-            <div style={{textAlign:"center"}}>
+            <div style={{textAlign:"center"}} id="genre-options" onMouseEnter={showGenreOptionsTooltip}>
                 <input type="radio" id="" name="music-type" value="" defaultChecked/><label for="">All</label>
                 <input type="radio" id="rock" name="music-type" value="rock" disabled/><label for="rock">Rock</label>
                 <input type="radio" id="hard rock" name="music-type" value="hard rock" disabled/><label for="hard rock">Hard Rock</label>
@@ -294,7 +325,7 @@ function Input(props) {
                 <div className="loading-status">{loadingStatus}</div>
             </div>: ""}
             {win === true ? <div className="win-banner">YOU WIN!<br></br><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></div> : ""}
-            <div className="guess-input">
+            <div className="guess-input" onMouseEnter={showGuessInputTooltip}>
                 <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
                 <button id="guess-button" onClick={() => processGuess(guess, year)} disabled={year === "" || loaded===true}>Submit</button>       
             </div>
