@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Loader from 'react-loader-spinner';
 import "./css/Input.css";
+import jsonData from "./data/jsonData.json";
 
 function Input(props) {
     const {musicList, setMusicList} = props;
@@ -67,37 +68,31 @@ function Input(props) {
       ];
 
     const getMusic = async(year, musicType) =>{
-        const musicYearUrl = "https://cors-anywhere.herokuapp.com/https://www.google.com/search?&origin=*&q=list+of+songs+";
-        const musicUrl = musicYearUrl + "+" + musicType + "+" + year;
-        // console.log("Retrieving Music...");
-        const data = await fetch(musicUrl);
-        return data.text();
+        const data = await jsonData[year].music;
+        // console.log("MUSIC DATA");
+        // console.log(data)
+        return data;
     }
 
     const getMovies = async(year) =>{
-        const movieYearUrl = "https://cors-anywhere.herokuapp.com/https://www.imdb.com/search/title/?year=" + year + "-01-01," + year + "-12-31&view=simple";
-        const movieUrl = movieYearUrl;
         // console.log("Retrieving Movies...");
-        const data = await fetch(movieUrl);
-        return data.text();
+        const data = await jsonData[year].movies;
+        return data;
     }
 
     const getGames = async(year) =>{
-        const gameUrl = "https://cors-anywhere.herokuapp.com/https://www.imdb.com/search/title/?title_type=video_game&year=" + year + "-01-01," + year + "-12-31&view=simple";
         // console.log("Retrieving Games...");
-        const data = await fetch(gameUrl);
-        return data.text();
+        const data = jsonData[year].games;
+        return data;
     }
 
     const getEvents = async(year) =>{
-        const eventUrl = "https://cors-anywhere.herokuapp.com/https://www.onthisday.com/events/date/" + year;
         // console.log("Retrieving Events...");
-        const data = await fetch(eventUrl);
-        return data.text();
+        const data = await jsonData[year].events
+        return data;
     }
 
     const populateMusic = async (year) =>{
-        const parser = new DOMParser();
         setLoadingStatus("Populating Music...");
 
         const filters = document.querySelector("input[name='music-type']:checked");
@@ -108,11 +103,10 @@ function Input(props) {
         if(data === null || data === ""){
             console.log("Data was null");
             data = await getMusic(year, filter);
-            const htmldoc = parser.parseFromString(data,'text/html');
-            const all = htmldoc.querySelectorAll(".rlc__slider-page div a .title, .rlc__slider-page div a span:nth-of-type(1)");
-            for(let i=0; i<all.length/2;i+=2){
-                let song = all[i]["innerText"];
-                let artist = all[i+1]["innerText"];
+
+            for(let i=0; i<data.length;i++){
+                let song = data[i][0];
+                let artist = data[i][1];
                 let artistSong = artist + " - " + song;
                 if(!musicList.includes(artistSong))
                     musicList.push(artistSong);
@@ -132,21 +126,14 @@ function Input(props) {
 
 
     async function populateMovies(year){
-        const parser = new DOMParser();
         setLoadingStatus("Populating Movies...");
 
         var data = localStorage.getItem("movies_" + year);
 
         if(data === null || data === ""){
             data = await getMovies(year);
-            var htmldoc = parser.parseFromString(data,'text/html');
-            const all = htmldoc.querySelectorAll(".col-title span a");
-            for(let i=1; i<all.length;i++){
-                if(i > 50){
-                    break;
-                }
-                let col = all[i];
-                var title = col["innerText"];
+            for(let i=0; i<data.length;i++){
+                let title = data[i];
                 movieList.push(title);
             }
             localStorage.setItem("movies_" + year, movieList);
@@ -162,21 +149,15 @@ function Input(props) {
     };
 
     async function populateGames(year){
-        const parser = new DOMParser();
         setLoadingStatus("Populating Games...");
 
         var data = localStorage.getItem("games_" + year);
 
         if(data === null || data === ""){
             data = await getGames(year);
-            var htmldoc = parser.parseFromString(data,'text/html');
-            const all = htmldoc.querySelectorAll(".col-title span a");
-            for(let i=1; i<all.length;i++){
-                if(i > 50){
-                    break;
-                }
-                let col = all[i];
-                var title = col["innerText"];
+
+            for(let i=0; i<data.length;i++){
+                let title = data[i];
                 gameList.push(title);
             }
             localStorage.setItem("games_" + year, gameList);
@@ -192,22 +173,16 @@ function Input(props) {
     };   
 
     async function populateEvents(year){
-        const parser = new DOMParser();
+
         setLoadingStatus("Populating Events...");
 
         var data = localStorage.getItem("events_" + year);
 
         if(data === null || data === ""){
             data = await getEvents(year);
-            var htmldoc = parser.parseFromString(data,'text/html');
-            const all = htmldoc.querySelectorAll(".event, .section--highlight .wrapper .grid .grid__item p");
-            console.log(all);
-            for(let i=1; i<all.length;i++){
-                if(i > 50){
-                    break;
-                }
-                let col = all[i];
-                var title = col["innerText"];
+
+            for(let i=0; i<data.length;i++){
+                let title = data[i];
                 eventList.push(title);
             }
             localStorage.setItem("events_" + year, eventList);
