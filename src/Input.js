@@ -248,6 +248,14 @@ function Input(props) {
         console.log(musicList);
     }
 
+    const playAgain = () => {
+        window.location.reload(true);
+    }
+
+    const close = () => {
+        setWin(false);
+    }
+
     return(
         <div>
             
@@ -268,10 +276,10 @@ function Input(props) {
                 {loaded && <Loader type="TailSpin" color="#1D3557"/>}
                 <div className="loading-status">{loadingStatus}</div>
             </div>: ""}
-            {win === true ? <div className="win-banner">YOU WIN!</div> : ""}
+            {win === true ? <div className="win-banner">YOU WIN!<br></br><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></div> : ""}
             <div className="guess-input">
                 <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
-                <button id="guess-button" onClick={() => processGuess(guess, year)}>Submit</button>       
+                <button id="guess-button" onClick={() => processGuess(guess, year)} disabled={year === "" || loaded===true}>Submit</button>       
             </div>
         </div>
     ) 
