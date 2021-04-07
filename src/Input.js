@@ -257,11 +257,11 @@ function Input(props) {
             </div>
             <br/>
             <div style={{textAlign:"center"}}>
-                <input type="radio" name="music-type" value="" defaultChecked/>All
-                <input type="radio" name="music-type" value="rock"/>Rock
-                <input type="radio" name="music-type" value="hard rock"/>Hard Rock
-                <input type="radio" name="music-type" value="pop"/>Pop
-                <input type="radio" name="music-type" value="metal"/>Metal
+                <input type="radio" id="" name="music-type" value="" defaultChecked/><label for="">All</label>
+                <input type="radio" id="rock" name="music-type" value="rock" disabled/><label for="rock">Rock</label>
+                <input type="radio" id="hard rock" name="music-type" value="hard rock" disabled/><label for="hard rock">Hard Rock</label>
+                <input type="radio" id="pop" name="music-type" value="pop" disabled/><label for="pop">Pop</label>
+                <input type="radio" id="metal" name="music-type" value="metal" disabled/><label for="metal">Metal</label>
             </div>
             {loaded === true ?
             <div className="loading-overlay">
