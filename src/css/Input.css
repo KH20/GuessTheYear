@@ -4,6 +4,22 @@
     justify-content: center;
 }
 
+#genre-options{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+#guess-button{
+    padding: 0.9em 1em;
+    background-color: orange;
+}
+
+.guess-input{
+    display:flex;
+    justify-content: center;
+}
+
 .loading-overlay{
     position: absolute;
     display: inline-block;
@@ -48,21 +64,33 @@ input[type=text] {
     max-width: 10em;
 }
 
-#guess-button{
-    padding: 0.9em 1em;
-    background-color: orange;
-}
-
-.guess-input{
-    text-align: center;
-}
-
 #submit-button{
     padding: 0.9em 1em;
 }
 
 label{
     color:grey;
+}
+
+#options-icon{
+    font-size:x-large;
+}
+
+#options{
+    padding:0.5em;
+    border-radius: 0.5em;
+    margin-left: 1em;
+    margin-right:1em;
+    background-color: #1d3557;
+    color:white;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    min-width: 2em;
+    margin-left:88.5%;
 }
 
 button:disabled{
