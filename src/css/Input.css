@@ -4,22 +4,6 @@
     justify-content: center;
 }
 
-#genre-options{
-    text-align: center;
-    justify-content: center;
-    display: flex;
-}
-
-#guess-button{
-    padding: 0.9em 1em;
-    background-color: orange;
-}
-
-.guess-input{
-    display:flex;
-    justify-content: center;
-}
-
 .loading-overlay{
     position: absolute;
     display: inline-block;
@@ -62,6 +46,15 @@ input[type=text] {
     box-sizing: border-box;
     border-radius: 0.5em;
     max-width: 10em;
+}
+
+#guess-button{
+    padding: 0.9em 1em;
+    background-color: orange;
+}
+
+.guess-input{
+    text-align: center;
 }
 
 #submit-button{

@@ -276,16 +276,16 @@ function Input(props) {
     }
 
     const showYearInputToolTip = () => {
-        tippy('.year-input-content', {
+        tippy('.year-input', {
             content: "Leave the year blank for Single Player Mode",
             hideOnClick: false,
             duration:[100,250],
-            trigger: "mouseenter"
+            trigger: "mouseenter",
         });
     }
 
     const showGuessInputTooltip = () => {
-        tippy('.guess-input-content', {
+        tippy('.guess-input', {
             content: "Input your guess here",
             hideOnClick: false,
             duration:[100,250],
@@ -295,7 +295,7 @@ function Input(props) {
     }
 
     const showGenreOptionsTooltip = () => {
-        tippy('.genre-options-input', {
+        tippy('#genre-options', {
             content: "Genre options have been disabled temporarily",
             hideOnClick: false,
             duration:[100,250],
@@ -307,21 +307,17 @@ function Input(props) {
     return(
         <div>
             <button id="options" disabled><i class="fas fa-cog" id="options-icon"></i></button>
-            <div className="year-input">
-                <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
-                    <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
-                    <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>  
-                </div>
+            <div className="year-input" onMouseEnter={showYearInputToolTip}>
+                <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year" ></input>
+                <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>       
             </div>
             <br/>
-            <div id="genre-options" onMouseEnter={showGenreOptionsTooltip}>
-                <div className="genre-options-input">
-                    <input type="radio" id="" name="music-type" value="" defaultChecked/><label for="">All</label>
-                    <input type="radio" id="rock" name="music-type" value="rock" disabled/><label for="rock">Rock</label>
-                    <input type="radio" id="hard rock" name="music-type" value="hard rock" disabled/><label for="hard rock">Hard Rock</label>
-                    <input type="radio" id="pop" name="music-type" value="pop" disabled/><label for="pop">Pop</label>
-                    <input type="radio" id="metal" name="music-type" value="metal" disabled/><label for="metal">Metal</label>
-                </div>
+            <div style={{textAlign:"center"}} id="genre-options" onMouseEnter={showGenreOptionsTooltip}>
+                <input type="radio" id="" name="music-type" value="" defaultChecked/><label for="">All</label>
+                <input type="radio" id="rock" name="music-type" value="rock" disabled/><label for="rock">Rock</label>
+                <input type="radio" id="hard rock" name="music-type" value="hard rock" disabled/><label for="hard rock">Hard Rock</label>
+                <input type="radio" id="pop" name="music-type" value="pop" disabled/><label for="pop">Pop</label>
+                <input type="radio" id="metal" name="music-type" value="metal" disabled/><label for="metal">Metal</label>
             </div>
             {loaded === true ?
             <div className="loading-overlay">
@@ -329,11 +325,9 @@ function Input(props) {
                 <div className="loading-status">{loadingStatus}</div>
             </div>: ""}
             {win === true ? <div className="win-banner">YOU WIN!<br></br><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></div> : ""}
-            <div className="guess-input">
-                <div className="guess-input-content" onMouseEnter={showGuessInputTooltip}>
-                    <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
-                    <button id="guess-button" onClick={() => processGuess(guess, year)} disabled={year === "" || loaded===true}>Submit</button>      
-                </div>
+            <div className="guess-input" onMouseEnter={showGuessInputTooltip}>
+                <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
+                <button id="guess-button" onClick={() => processGuess(guess, year)} disabled={year === "" || loaded===true}>Submit</button>       
             </div>
         </div>
     ) 
