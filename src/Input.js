@@ -28,6 +28,8 @@ function Input(props) {
     const {year, setYear} = props;
     const [input, setInput] = useState("");
     const [guess, setGuess] = useState("");
+    const [giveUp, setGiveUp] = useState(false);
+    const [disable, setDisable] = useState(false);
     const [loadingStatus, setLoadingStatus] = useState("");
     const [win, setWin] = useState(false);
     const years = [
@@ -85,25 +87,20 @@ function Input(props) {
 
     const getMusic = async(year, musicType) =>{
         const data = await jsonData[year].music;
-        // console.log("MUSIC DATA");
-        // console.log(data)
         return data;
     }
 
     const getMovies = async(year) =>{
-        // console.log("Retrieving Movies...");
         const data = await jsonData[year].movies;
         return data;
     }
 
     const getGames = async(year) =>{
-        // console.log("Retrieving Games...");
         const data = jsonData[year].games;
         return data;
     }
 
     const getEvents = async(year) =>{
-        // console.log("Retrieving Events...");
         const data = await jsonData[year].events
         return data;
     }
@@ -247,15 +244,19 @@ function Input(props) {
     }
 
     const processGuess = (guess, year) => {
-        console.log("GUESS: " + guess);
-        console.log("YEAR: " + year);
         if(guess === year){
-            console.log("YOU WIN!");
             setWin(true);
+            setDisable(true);
         }
         else{
             notifier.alert("Incorrect :(");
         }
+    }
+
+    const processGiveUp = () => {
+        setGiveUp(true);
+        setDisable(true);
+
     }
 
     const handleYearSubmit = (e) =>{
@@ -273,6 +274,7 @@ function Input(props) {
 
     const close = () => {
         setWin(false);
+        setGiveUp(false);
     }
 
     const showYearInputToolTip = () => {
@@ -328,12 +330,17 @@ function Input(props) {
                 {loaded && <Loader type="TailSpin" color="#1D3557"/>}
                 <div className="loading-status">{loadingStatus}</div>
             </div>: ""}
-            {win === true ? <div className="win-banner">YOU WIN!<br></br><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></div> : ""}
+            {win === true ? <div className="win-banner">YOU WIN!<p><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></p></div> : ""}
+            {giveUp === true ? <div className="giveup-banner">The Year was: {year}<p><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></p></div> : ""}
             <div className="guess-input">
                 <div className="guess-input-content" onMouseEnter={showGuessInputTooltip}>
                     <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
-                    <button id="guess-button" onClick={() => processGuess(guess, year)} disabled={year === "" || loaded===true}>Submit</button>      
+                    <button id="guess-button" onClick={() => processGuess(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</button>      
                 </div>
+                <div id="giveup-div">
+                    <button id="giveup-button" onClick={() => processGiveUp()} disabled={(year === "" || loaded===true) || disable===true}>Give Up</button> 
+                </div>
+                
             </div>
         </div>
     ) 
