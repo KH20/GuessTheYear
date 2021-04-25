@@ -255,7 +255,7 @@ function Input(props) {
 
     }
 
-    const processGuess = (guess, year) => {
+    const processGuessSubmit = (guess, year) => {
 
         if(years.indexOf(guess) < 0){
             inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999 between 1970-2020");
@@ -289,6 +289,14 @@ function Input(props) {
         setYear(input);
         handleListPopulation(input);
 
+    }
+
+    const handleGuessInput = (e) => {
+        if(!checkInputIsNumber(e)){
+            return;
+        }
+
+        setGuess(e.target.value);
     }
 
     const playAgain = () => {
@@ -329,21 +337,26 @@ function Input(props) {
         });
     }
 
-    const handleYearInput = (e) => {
-      
-        const len = e.target.value.length;
- 
+    const checkInputIsNumber = (e) => {
         //Check if last entered key is not a number.
         //Guards against index reference error when backspace is entered
         //Stops user entering letters
+        const len = e.target.value.length;
         if(!isNaN(e.target.value.charCodeAt(0))){
             if(e.target.value[len-1].charCodeAt(0) < 48 || e.target.value[len-1].charCodeAt(0) > 57){
                 inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999");
-                return;
+                return false;
             }
         }
+        return true;
+    }
 
-            
+    const handleYearInput = (e) => {
+
+        if(!checkInputIsNumber(e)){
+            return;
+        }
+
         setInput(e.target.value)
     }
 
@@ -375,8 +388,8 @@ function Input(props) {
             {giveUp === true ? <div className="giveup-banner">The Year was: {year}<p><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></p></div> : ""}
             <div className="guess-input">
                 <div className="guess-input-content" onMouseEnter={showGuessInputTooltip}>
-                    <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
-                    <button id="guess-button" onClick={() => processGuess(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</button>      
+                    <input type="text" name="guess" value={guess} onChange={e => handleGuessInput(e)} placeholder="Guess"></input>
+                    <button id="guess-button" onClick={() => processGuessSubmit(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</button>      
                 </div>
                 <div id="giveup-div">
                     <button id="giveup-button" onClick={() => processGiveUp()} disabled={(year === "" || loaded===true) || disable===true}>Give Up</button> 
