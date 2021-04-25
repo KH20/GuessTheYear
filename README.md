@@ -24,4 +24,4 @@ Be warned that clicking the links can sometimes spoil this experience.
 ## Known Bugs
 * The application can sometimes fail if the scraped data isn't returned correctly. [FIXED - Data is now local]
 * Single Player mode has no option to submit a guessed year with feedback. [FIXED - User will be shown a win banner when correct]
-* The event clues need to be randomised rather than start from the events of January, and end in at December.
+* The event clues need to be randomised rather than start from the events of January, and end in at December. [POSSIBLY FIXED. Events appear to be random]
