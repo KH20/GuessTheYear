@@ -9,14 +9,26 @@ import 'tippy.js/dist/tippy.css';
 
 let globalOptions =  {
     durations:{
-        global: 2000
+        global: 2000,
     },
     position:"top-right",
     labels:{
         alert: "Error"
     }
 };
+
+let inputErr =  {
+    durations:{
+        global: 4000,
+    },
+    position:"top-right",
+    labels:{
+        alert: "Error"
+    }
+};
+
 let notifier = new AWN(globalOptions)
+let inputNotifier = new AWN(inputErr)
 
 
 function Input(props) {
@@ -262,10 +274,15 @@ function Input(props) {
     const handleYearSubmit = (e) =>{
         
         e.preventDefault();
+
+        if(years.indexOf(input) < 0){
+            inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999 between 1970-2020");
+            return;
+        }
+
         setYear(input);
         handleListPopulation(input);
-        console.log(input);
-        console.log(musicList);
+
     }
 
     const playAgain = () => {
@@ -306,12 +323,30 @@ function Input(props) {
         });
     }
 
+    const handleYearInput = (e) => {
+      
+        const len = e.target.value.length;
+ 
+        //Check if last entered key is not a number.
+        //Guards against index reference error when backspace is entered
+        //Stops user entering letters
+        if(!isNaN(e.target.value.charCodeAt(0))){
+            if(e.target.value[len-1].charCodeAt(0) < 48 || e.target.value[len-1].charCodeAt(0) > 57){
+                inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999");
+                return;
+            }
+        }
+
+            
+        setInput(e.target.value)
+    }
+
     return(
         <div>
             <button id="options" disabled><i class="fas fa-cog" id="options-icon"></i></button>
             <div className="year-input">
                 <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
-                    <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
+                    <input type="text" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input>
                     <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>  
                 </div>
             </div>
