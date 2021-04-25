@@ -256,6 +256,12 @@ function Input(props) {
     }
 
     const processGuess = (guess, year) => {
+
+        if(years.indexOf(guess) < 0){
+            inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999 between 1970-2020");
+            return;
+        }
+
         if(guess === year){
             setWin(true);
             setDisable(true);
@@ -275,8 +281,8 @@ function Input(props) {
         
         e.preventDefault();
 
-        if(years.indexOf(input) < 0){
-            inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999 between 1970-2020");
+        if(years.indexOf(input) < 0 && input !== ""){
+            inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999 between 1970-2020 or blank");
             return;
         }
 
