@@ -20,6 +20,7 @@ Be warned that clicking the links can sometimes spoil this experience.
 * ~~Multiple shot mode (Allows multiple guesses without telling you the year).~~
 * Feedback on how far away from the correct year your guess is - if feedback mode is enabled.
 * Ability to choose a year range. e.g. Limiting the years to 1980-2021.
+* Redesign the UI to use Material Design, and include media such as album art.
 
 ## Known Bugs
 * The application can sometimes fail if the scraped data isn't returned correctly. [FIXED - Data is now local]
