@@ -9,14 +9,26 @@ import 'tippy.js/dist/tippy.css';
 
 let globalOptions =  {
     durations:{
-        global: 2000
+        global: 2000,
     },
     position:"top-right",
     labels:{
         alert: "Error"
     }
 };
+
+let inputErr =  {
+    durations:{
+        global: 4000,
+    },
+    position:"top-right",
+    labels:{
+        alert: "Error"
+    }
+};
+
 let notifier = new AWN(globalOptions)
+let inputNotifier = new AWN(inputErr)
 
 
 function Input(props) {
@@ -32,6 +44,7 @@ function Input(props) {
     const [disable, setDisable] = useState(false);
     const [loadingStatus, setLoadingStatus] = useState("");
     const [win, setWin] = useState(false);
+    const [showOptions, setShowOptions] = useState(false);
     const years = [
         "1970",
         "1971",
@@ -84,6 +97,7 @@ function Input(props) {
         "2018",
         "2019"
       ];
+    const [minimumYear, setMinimumYear] = useState(years[0]);
 
     const getMusic = async(year, musicType) =>{
         const data = await jsonData[year].music;
@@ -212,7 +226,9 @@ function Input(props) {
 
 
     const randYearGen = () => {
-        const rand = Math.floor(Math.random() * 51);
+        let rand = 0;
+        while(parseInt(years[rand]) < parseInt(minimumYear))            //This is dirty as hell and needs revising todo
+            rand = Math.floor(Math.random() * 51);
         console.log(years[rand]);
         return years[rand];
     }
@@ -243,7 +259,13 @@ function Input(props) {
 
     }
 
-    const processGuess = (guess, year) => {
+    const processGuessSubmit = (guess, year) => {
+
+        if(years.indexOf(guess) < 0){
+            inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999 between 1970-2020");
+            return;
+        }
+
         if(guess === year){
             setWin(true);
             setDisable(true);
@@ -262,10 +284,23 @@ function Input(props) {
     const handleYearSubmit = (e) =>{
         
         e.preventDefault();
+
+        if(years.indexOf(input) < 0 && input !== ""){
+            inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999 between 1970-2020 or blank");
+            return;
+        }
+
         setYear(input);
         handleListPopulation(input);
-        console.log(input);
-        console.log(musicList);
+
+    }
+
+    const handleGuessInput = (e) => {
+        if(!checkInputIsNumber(e)){
+            return;
+        }
+
+        setGuess(e.target.value);
     }
 
     const playAgain = () => {
@@ -306,12 +341,59 @@ function Input(props) {
         });
     }
 
+    const checkInputIsNumber = (e) => {
+        //Check if last entered key is not a number.
+        //Guards against index reference error when backspace is entered
+        //Stops user entering letters
+        const len = e.target.value.length;
+        if(!isNaN(e.target.value.charCodeAt(0))){
+            if(e.target.value[len-1].charCodeAt(0) < 48 || e.target.value[len-1].charCodeAt(0) > 57){
+                inputNotifier.alert("Input must be a valid year in the format XXXX e.g. 1999");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    const handleYearInput = (e) => {
+
+        if(!checkInputIsNumber(e)){
+            return;
+        }
+
+        setInput(e.target.value)
+    }
+
+    const showOptionsMenu = () => {
+        if(showOptions === false){
+            setShowOptions(true);
+        }
+        else{
+            setShowOptions(false);
+        }
+    }
+
+    const saveMinYearOption = () => {
+        let min = document.getElementById("minYear").value;
+        setMinimumYear(min);
+        console.log(minimumYear);
+        setShowOptions(false);
+    }
+
     return(
         <div>
-            <button id="options" disabled><i class="fas fa-cog" id="options-icon"></i></button>
+            {showOptions === true ? 
+                <div id="optionsDisplay">
+                    <button class="optionButton" id="closeOptions" onClick={showOptionsMenu}>X</button>
+                    <button class="optionButton" id="saveOptions" onClick={saveMinYearOption}>Save</button>
+                    <div>Lowest Year: <input id="minYear" name="minyear"></input></div>
+                </div>
+                :<div></div>
+            }
+            <button id="options" onClick={showOptionsMenu}><i class="fas fa-cog" id="options-icon"></i></button>
             <div className="year-input">
                 <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
-                    <input type="text" name="year" value={input} onChange={e => setInput(e.target.value)} placeholder="Year"></input>
+                    <input type="text" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input>
                     <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>  
                 </div>
             </div>
@@ -334,8 +416,8 @@ function Input(props) {
             {giveUp === true ? <div className="giveup-banner">The Year was: {year}<p><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></p></div> : ""}
             <div className="guess-input">
                 <div className="guess-input-content" onMouseEnter={showGuessInputTooltip}>
-                    <input type="text" name="guess" value={guess} onChange={e => setGuess(e.target.value)} placeholder="Guess"></input>
-                    <button id="guess-button" onClick={() => processGuess(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</button>      
+                    <input type="text" name="guess" value={guess} onChange={e => handleGuessInput(e)} placeholder="Guess"></input>
+                    <button id="guess-button" onClick={() => processGuessSubmit(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</button>      
                 </div>
                 <div id="giveup-div">
                     <button id="giveup-button" onClick={() => processGiveUp()} disabled={(year === "" || loaded===true) || disable===true}>Give Up</button> 
