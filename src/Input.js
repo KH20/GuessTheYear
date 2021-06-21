@@ -44,6 +44,7 @@ function Input(props) {
     const [disable, setDisable] = useState(false);
     const [loadingStatus, setLoadingStatus] = useState("");
     const [win, setWin] = useState(false);
+    const [showOptions, setShowOptions] = useState(false);
     const years = [
         "1970",
         "1971",
@@ -96,6 +97,7 @@ function Input(props) {
         "2018",
         "2019"
       ];
+    const [minimumYear, setMinimumYear] = useState(years[0]);
 
     const getMusic = async(year, musicType) =>{
         const data = await jsonData[year].music;
@@ -224,7 +226,9 @@ function Input(props) {
 
 
     const randYearGen = () => {
-        const rand = Math.floor(Math.random() * 51);
+        let rand = 0;
+        while(parseInt(years[rand]) < parseInt(minimumYear))            //This is dirty as hell and needs revising todo
+            rand = Math.floor(Math.random() * 51);
         console.log(years[rand]);
         return years[rand];
     }
@@ -360,9 +364,33 @@ function Input(props) {
         setInput(e.target.value)
     }
 
+    const showOptionsMenu = () => {
+        if(showOptions === false){
+            setShowOptions(true);
+        }
+        else{
+            setShowOptions(false);
+        }
+    }
+
+    const saveMinYearOption = () => {
+        let min = document.getElementById("minYear").value;
+        setMinimumYear(min);
+        console.log(minimumYear);
+        setShowOptions(false);
+    }
+
     return(
         <div>
-            <button id="options" disabled><i class="fas fa-cog" id="options-icon"></i></button>
+            {showOptions === true ? 
+                <div id="optionsDisplay">
+                    <button class="optionButton" id="closeOptions" onClick={showOptionsMenu}>X</button>
+                    <button class="optionButton" id="saveOptions" onClick={saveMinYearOption}>Save</button>
+                    <div>Lowest Year: <input id="minYear" name="minyear"></input></div>
+                </div>
+                :<div></div>
+            }
+            <button id="options" onClick={showOptionsMenu}><i class="fas fa-cog" id="options-icon"></i></button>
             <div className="year-input">
                 <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
                     <input type="text" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input>

@@ -9,6 +9,29 @@
     justify-content: center;
     display: flex;
 }
+#optionsDisplay{
+    background-color: white;
+    align-content: center;
+    z-index: 1;
+}
+
+.optionButton{
+    padding:0 !important;
+    min-width: 3em !important;
+    float: right;
+}
+
+#closeOptions{
+    background-color: red;
+}
+
+#saveOptions{
+    background-color: green;
+}
+
+#minYear{
+    max-width: 4em;
+}
 
 #guess-button{
     padding: 0.9em 1em;
