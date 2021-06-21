@@ -13,8 +13,6 @@ For further help and enjoyment, you can click the data to listen to the song, or
 For solo play, don't type a year and just hit submit. 
 Be warned that clicking the links can sometimes spoil this experience.
 
-#### This mode is in experimental phase and not recommended for the time being. To use this mode in the current phase you must use the browser console to view your year after you've guessed.
-
 ## Upcoming Updates
 * ~~Ability for single player mode to give up, or guess a year with feedback if they are correct or not.~~
 * ~~Multiple shot mode (Allows multiple guesses without telling you the year).~~
