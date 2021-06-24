@@ -19,6 +19,7 @@ Be warned that clicking the links can sometimes spoil this experience.
 * Feedback on how far away from the correct year your guess is - if feedback mode is enabled.
 * Ability to choose a year range. e.g. Limiting the years to 1980-2021.
 * Redesign the UI to use Material Design, and include media such as album art.
+* A change for mobile platforms where the clues can be swiped across, and scrolling will only scroll the clue frame in focus.
 
 ## Known Bugs
 * The application can sometimes fail if the scraped data isn't returned correctly. [FIXED - Data is now local]
