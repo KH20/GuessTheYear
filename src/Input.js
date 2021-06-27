@@ -99,7 +99,7 @@ function Input(props) {
       ];
     const [minimumYear, setMinimumYear] = useState(years[0]);
 
-    const getMusic = async(year, musicType) =>{
+    const getMusic = async(year) =>{
         const data = await jsonData[year].music;
         return data;
     }
@@ -122,24 +122,20 @@ function Input(props) {
     const populateMusic = async (year) =>{
         setLoadingStatus("Populating Music...");
 
-        const filters = document.querySelector("input[name='music-type']:checked");
-        const filter = filters.value;
-        console.log("FILTER: " + filter);
-        var data = localStorage.getItem("music_" + filter + "_" + year);
+        var data = localStorage.getItem("music_" + year);
 
         if(data === null || data === ""){
             console.log("Data was null");
-            data = await getMusic(year, filter);
+            data = await getMusic(year);
 
             for(let i=0; i<data.length;i++){
                 let song = data[i][0];
                 let artist = data[i][1];
-                let artistSong = artist + " - " + song;
-                if(!musicList.includes(artistSong))
-                    musicList.push(artistSong);
+                // let artistSong = artist + " - " + song;
+                let musicClue = {"artist":artist, "title":song}
+                musicList.push(musicClue);
             }
-            console.log("STATE: " + filter);
-            localStorage.setItem("music_" + filter + "_" + year, musicList);
+            // localStorage.setItem("music_" + filter + "_" + year, musicList);
             setMusicList(musicList);
         }
         else{
@@ -163,7 +159,7 @@ function Input(props) {
                 let title = data[i];
                 movieList.push(title);
             }
-            localStorage.setItem("movies_" + year, movieList);
+            // localStorage.setItem("movies_" + year, movieList);
             setMovieList(movieList);
         }
         else{
@@ -187,7 +183,7 @@ function Input(props) {
                 let title = data[i];
                 gameList.push(title);
             }
-            localStorage.setItem("games_" + year, gameList);
+            // localStorage.setItem("games_" + year, gameList);
             setGameList(gameList);
         }
         else{
@@ -212,7 +208,7 @@ function Input(props) {
                 let title = data[i];
                 eventList.push(title);
             }
-            localStorage.setItem("events_" + year, eventList);
+            // localStorage.setItem("events_" + year, eventList);
             setEventList(eventList);
         }
         else{
@@ -398,15 +394,7 @@ function Input(props) {
                 </div>
             </div>
             <br/>
-            <div id="genre-options" onMouseEnter={showGenreOptionsTooltip}>
-                <div className="genre-options-input">
-                    <input type="radio" id="" name="music-type" value="" defaultChecked/><label for="">All</label>
-                    <input type="radio" id="rock" name="music-type" value="rock" disabled/><label for="rock">Rock</label>
-                    <input type="radio" id="hard rock" name="music-type" value="hard rock" disabled/><label for="hard rock">Hard Rock</label>
-                    <input type="radio" id="pop" name="music-type" value="pop" disabled/><label for="pop">Pop</label>
-                    <input type="radio" id="metal" name="music-type" value="metal" disabled/><label for="metal">Metal</label>
-                </div>
-            </div>
+
             {loaded === true ?
             <div className="loading-overlay">
                 {loaded && <Loader type="TailSpin" color="#1D3557"/>}
