@@ -4,11 +4,14 @@
     flex-wrap: wrap;
     justify-content: center;
     color:white;
-    max-width:
 }
 
 .section-header{
     text-align: center;
+}
+
+.carousel .slide{
+    text-align: left !important;
 }
 
 .music{

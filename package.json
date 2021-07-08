@@ -13,7 +13,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loader-spinner": "^3.1.14",
-    "react-material-ui-carousel": "^2.2.6",
+    "react-responsive-carousel": "^3.2.19",
     "react-scripts": "3.4.1",
     "tippy.js": "^6.3.1"
   },

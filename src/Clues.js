@@ -1,8 +1,9 @@
 import React from 'react';
 import "../src/css/Clues.css"; 
 import Clue from "./Clue.js";
-import Carousel from 'react-material-ui-carousel'
-import { Paper, Button } from '@material-ui/core'
+import {Carousel} from 'react-responsive-carousel'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 
 
