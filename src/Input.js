@@ -223,8 +223,8 @@ function Input(props) {
 
     const randYearGen = () => {
         let rand = 0;
-        while(parseInt(years[rand]) < parseInt(minimumYear))            //This is dirty as hell and needs revising todo
-            rand = Math.floor(Math.random() * 51);
+        let minYear = years.indexOf(minimumYear);
+        rand = Math.floor(Math.random() * (years.length - minYear) + minYear);
         console.log(years[rand]);
         return years[rand];
     }
