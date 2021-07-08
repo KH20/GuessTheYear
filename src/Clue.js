@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     cover: {
       width: 151,
     },
+    
   }));
 
 function Clue(props) {
