@@ -7,6 +7,7 @@ function Buttons(props) {
     const {eventList, knownEventClues, setKnownEventClues, setEventList} = props;
     const {year} = props;
     const {loaded} = props;
+    const {setActiveClue} = props;
 
     const getSong = () => {
         console.log("GETTING SONG...")
@@ -17,6 +18,7 @@ function Buttons(props) {
         var updatedList = [...musicList];
         updatedList.splice(rand,1);
         setMusicList(updatedList);
+        setActiveClue(0);
     }
 
     const getMovie = () => {
@@ -28,6 +30,7 @@ function Buttons(props) {
         var updatedList = [...movieList];
         updatedList.splice(rand,1);
         setMovieList(updatedList);
+        setActiveClue(1);
     }
 
     const getGame = () => {
@@ -39,6 +42,7 @@ function Buttons(props) {
         var updatedList = [...gameList];
         updatedList.splice(rand,1);
         setGameList(updatedList);
+        setActiveClue(2);
     }
 
     const getEvent = () => {
@@ -50,6 +54,7 @@ function Buttons(props) {
         var updatedList = [...eventList];
         updatedList.splice(rand,1);
         setEventList(updatedList);
+        setActiveClue(3);
     }
 
     return(

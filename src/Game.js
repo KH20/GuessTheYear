@@ -21,6 +21,7 @@ function Game() {
     const [year, setYear] = useState("");
     const [guess, setGuess] = useState("");
     const [loaded, setLoaded] = useState(false);
+    const [activeClue, setActiveClue] = useState(0);
     return(
         <div>
             <Input 
@@ -58,8 +59,10 @@ function Game() {
                 year={year}
                 guess={guess}
                 loaded={loaded}
+                activeClue={activeClue}
+                setActiveClue={setActiveClue}
             />
-            <Clues knownMusicClues={knownMusicClues} knownMovieClues={knownMovieClues} knownGameClues={knownGameClues} knownEventClues={knownEventClues}/>
+            <Clues knownMusicClues={knownMusicClues} knownMovieClues={knownMovieClues} knownGameClues={knownGameClues} knownEventClues={knownEventClues} activeClue={activeClue} setActiveClue={setActiveClue}/>
         </div>
     ) 
 }
