@@ -141,12 +141,23 @@ a{
     color:white;
 }
 
+.MuiCardContent-root{
+    max-width:110%;
+}
+
 @media only screen and (max-width:1100px){
+
+    .carousel{
+        max-width: 1000px;
+    }
+
     .music{
         width:40%;
+        margin-top: 2em;
     }
     .movies{
         width:40%;
+        margin-top: 2em;
     }
     .games{
         width:40%;
@@ -165,20 +176,25 @@ a{
         width: 100%;
         max-width: 100%;
     }
+
+    .carousel{
+        max-width: 350px;
+    }
     
     .music{
-        width:100%;
+        width:97%;
+        margin-top: 2em;
     }
     .movies{
-        width:100%;
+        width:97%;
         margin-top:2em;
     }
     .games{
-        width:100%;
+        width:97%;
         margin-top:2em;
     }
     .events{
-        width:100%;
+        width:97%;
         margin-top:2em;
         margin-bottom:2em;
     }

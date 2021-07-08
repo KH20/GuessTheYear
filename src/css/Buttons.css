@@ -38,7 +38,7 @@ button{
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    min-width: 10em;
+
 }
 
 button:hover{
