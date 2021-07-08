@@ -10,6 +10,10 @@
     text-align: center;
 }
 
+.carousel{
+    max-width: 1200px;
+}
+
 .carousel .slide{
     text-align: left !important;
 }
