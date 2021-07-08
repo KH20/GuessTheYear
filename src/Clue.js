@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -27,7 +27,7 @@ function Clue(props) {
         <Card className={classes.root}>
         <div className={classes.details}>
         <CardContent className={classes.content}>
-            {props.type == "Music" && <div>
+            {props.type === "Music" && <div>
                 <Typography component="h5" variant="h5">
                     {props.title}
                 </Typography>
@@ -35,13 +35,13 @@ function Clue(props) {
                     {props.artist}
                 </Typography></div>
             }
-            {(props.type == "Movie" || props.type == "Game") && <div>
+            {(props.type === "Movie" || props.type === "Game") && <div>
                 <Typography component="h5" variant="h5">
                     {props.title}
                 </Typography>
             </div>
             }
-            {props.type == "Event" && <div>
+            {props.type === "Event" && <div>
                 <Typography component="h6" variant="h6">
                     {props.title}
                 </Typography>

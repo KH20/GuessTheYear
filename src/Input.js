@@ -327,16 +327,6 @@ function Input(props) {
         });
     }
 
-    const showGenreOptionsTooltip = () => {
-        tippy('.genre-options-input', {
-            content: "Genre options have been disabled temporarily",
-            hideOnClick: false,
-            duration:[100,250],
-            trigger: "mouseenter",
-            placement: "bottom"
-        });
-    }
-
     const checkInputIsNumber = (e) => {
         //Check if last entered key is not a number.
         //Guards against index reference error when backspace is entered
