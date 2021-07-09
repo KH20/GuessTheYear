@@ -11,7 +11,7 @@ For further help and enjoyment, you can click the data to listen to the song, or
 
 ### Single Player
 For solo play, don't type a year and just hit submit. 
-Be warned that clicking the links can sometimes spoil this experience.
+Be warned that clicking the clue links can sometimes spoil this experience by giving away the year (e.g. Movie clues link to IMDB, which displays the year of release).
 
 ## Upcoming Updates
 * ~~Ability for single player mode to give up, or guess a year with feedback if they are correct or not.~~
