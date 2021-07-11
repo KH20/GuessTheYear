@@ -50,7 +50,8 @@ export default function TransitionsModal() {
         <Fade in={open}>
           <div className={classes.paper}>
             <h1 id="transition-modal-title">Settings</h1>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+            <p id="transition-modal-description">Year Range: <input type="number" min="1970" max="2019" size="10"></input> - <input type="number" min="1970" max="2019" size="10"></input></p>
+            <button>OK</button><button>Cancel</button>
           </div>
         </Fade>
       </Modal>

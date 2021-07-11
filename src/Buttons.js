@@ -1,5 +1,6 @@
 import React from 'react';
- 
+import Button from '@material-ui/core/Button';
+
 function Buttons(props) {
     const {knownMusicClues, setKnownMusicClues, musicList, setMusicList} = props;
     const {movieList, knownMovieClues, setKnownMovieClues, setMovieList} = props;
@@ -8,6 +9,8 @@ function Buttons(props) {
     const {year} = props;
     const {loaded} = props;
     const {setActiveClue} = props;
+
+
 
     const getSong = () => {
         console.log("GETTING SONG...")
@@ -58,11 +61,13 @@ function Buttons(props) {
     }
 
     return(
-        <div className="buttons-container">
-            <button onClick={getSong} disabled={year === "" || loaded===true}>Get Song</button>
-            <button onClick={getMovie} disabled={year === "" || loaded===true}>Get Movie</button>
-            <button onClick={getGame} disabled={year === "" || loaded===true}>Get Game</button>
-            <button onClick={getEvent} disabled={year === "" || loaded===true}>Get Event</button>
+        <div>
+            <div id="buttonContainer">
+                <Button className="clueButton" color="primary" variant="contained" onClick={getSong} disabled={year === "" || loaded===true}>Get Song</Button>
+                <Button className="clueButton" color="primary" variant="contained" onClick={getMovie} disabled={year === "" || loaded===true}>Get Movie</Button>
+                <Button className="clueButton" color="primary" variant="contained" onClick={getGame} disabled={year === "" || loaded===true}>Get Game</Button>
+                <Button className="clueButton" color="primary" variant="contained" onClick={getEvent} disabled={year === "" || loaded===true}>Get Event</Button>
+            </div>
         </div>
     ) 
 }

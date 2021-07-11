@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Loader from 'react-loader-spinner';
 import Modal from "./Modal.js";
+import Button from '@material-ui/core/Button';
 import "./css/Input.css";
 import "./css/style.css";
 import jsonData from "./data/jsonData.json";
@@ -16,7 +17,7 @@ let globalOptions =  {
     labels:{
         alert: "Error"
     }
-};
+};  
 
 let inputErr =  {
     durations:{
@@ -97,6 +98,7 @@ function Input(props) {
         "2018",
         "2019"
       ];
+
     const [minimumYear, setMinimumYear] = useState(years[0]);
 
     const getMusic = async(year) =>{
@@ -358,13 +360,12 @@ function Input(props) {
 
     return(
         <div>
-
             <Modal></Modal>
             <div className="year-input">
                 <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
-                    <input type="text" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input>
-                    <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>  
+                    <input type="text" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input> 
                 </div>
+                <Button variant="contained" color="primary" id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</Button> 
             </div>
             <br/>
 
@@ -377,13 +378,10 @@ function Input(props) {
             {giveUp === true ? <div className="giveup-banner">The Year was: {year}<p><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></p></div> : ""}
             <div className="guess-input">
                 <div className="guess-input-content" onMouseEnter={showGuessInputTooltip}>
-                    <input type="text" name="guess" value={guess} onChange={e => handleGuessInput(e)} placeholder="Guess"></input>
-                    <button id="guess-button" onClick={() => processGuessSubmit(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</button>      
+                    <input type="text" name="guess" value={guess} onChange={e => handleGuessInput(e)} placeholder="Guess"></input>    
                 </div>
-                <div id="giveup-div">
-                    <button id="giveup-button" onClick={() => processGiveUp()} disabled={(year === "" || loaded===true) || disable===true}>Give Up</button> 
-                </div>
-                
+                <Button variant="contained" color="primary" id="guess-button" onClick={() => processGuessSubmit(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</Button>
+                <Button variant="contained" color="primary" id="giveup-button" onClick={() => processGiveUp()} disabled={(year === "" || loaded===true) || disable===true}>Give Up</Button> 
             </div>
         </div>
     ) 

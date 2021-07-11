@@ -33,16 +33,6 @@
     max-width: 4em;
 }
 
-#guess-button{
-    padding: 0.9em 1em;
-    background-color: orange;
-}
-
-#giveup-button{
-    padding: 0.9em 1em;
-    background-color: darkred;
-}
-
 #giveup-div{
     display: flex;
     align-items: center;
@@ -113,10 +103,6 @@ input[type=text] {
     max-width: 10em;
 }
 
-#submit-button{
-    padding: 0.9em 1em;
-}
-
 label{
     color:grey;
 }
@@ -140,21 +126,6 @@ label{
     position: relative;
     min-width: 2em;
     margin-left:88.5%;
-}
-
-button:disabled{
-    padding:2em;
-    border-radius: 0.5em;
-    margin-left: 1em;
-    margin-right:1em;
-    background-color: grey !important;
-    color:lightgrey;
-    text-align: center;
-    transition-duration: 0.4s;
-    text-decoration: none;
-    overflow: hidden;
-    position: relative;
-
 }
 
 @media only screen and (max-width:1100px){
