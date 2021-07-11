@@ -360,7 +360,12 @@ function Input(props) {
         <div>
 
             <Modal></Modal>
-
+            <div className="year-input">
+                <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
+                    <input type="text" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input>
+                    <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>  
+                </div>
+            </div>
             <br/>
 
             {loaded === true ?
