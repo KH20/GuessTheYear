@@ -22,9 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal() {
+export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const {minimumYear, setMinimumYear} = props;
 
   const handleOpen = () => {
     setOpen(true);
@@ -33,6 +34,13 @@ export default function TransitionsModal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const saveSettings = () => {
+    let minYear = document.getElementById("lowerLimit").value;
+    setMinimumYear(minYear);
+    console.log(minYear);
+    setOpen(false);
+  }
 
   return (
     <div>
@@ -55,7 +63,7 @@ export default function TransitionsModal() {
           <div className={classes.paper}>
             <h1 id="transition-modal-title">Settings</h1>
             <p id="transition-modal-description">Year Range: <input id="lowerLimit" type="number" min="1970" max="2019" size="10"></input> - <input id="upperLimit" type="number" min="1970" max="2019" size="10"></input></p>
-            <div><Button style={{ background: green[500] }}><CheckIcon style={{ color: "white" }}/></Button><Button style={{ background: red[500], marginLeft:"1em" }}><CloseIcon style={{ color: "white"}}/></Button></div>
+            <div><Button onClick={saveSettings} id="saveSettings" style={{ background: green[500] }}><CheckIcon style={{ color: "white" }}/></Button><Button onClick={handleClose} id="closeSettings" style={{ background: red[500], marginLeft:"1em" }}><CloseIcon style={{ color: "white"}}/></Button></div>
           </div>
         </Fade>
       </Modal>

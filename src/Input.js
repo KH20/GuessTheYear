@@ -98,8 +98,8 @@ function Input(props) {
         "2018",
         "2019"
       ];
-
-    const [minimumYear, setMinimumYear] = useState(years[0]);
+      const [minimumYear, setMinimumYear] = useState(years[0]);
+    
 
     const getMusic = async(year) =>{
         const data = await jsonData[year].music;
@@ -352,15 +352,9 @@ function Input(props) {
         setInput(e.target.value)
     }
 
-    const saveMinYearOption = () => {
-        let min = document.getElementById("minYear").value;
-        setMinimumYear(min);
-        console.log(minimumYear);
-    }
-
     return(
         <div>
-            <Modal></Modal>
+            <Modal minimumYear={minimumYear} setMinimumYear={setMinimumYear}></Modal>
             <div className="year-input">
                 <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
                     <input type="number" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input> 
