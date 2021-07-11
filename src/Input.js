@@ -363,7 +363,7 @@ function Input(props) {
             <Modal></Modal>
             <div className="year-input">
                 <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
-                    <input type="text" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input> 
+                    <input type="number" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input> 
                 </div>
                 <Button variant="contained" color="primary" id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</Button> 
             </div>
@@ -378,7 +378,7 @@ function Input(props) {
             {giveUp === true ? <div className="giveup-banner">The Year was: {year}<p><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></p></div> : ""}
             <div className="guess-input">
                 <div className="guess-input-content" onMouseEnter={showGuessInputTooltip}>
-                    <input type="text" name="guess" value={guess} onChange={e => handleGuessInput(e)} placeholder="Guess"></input>    
+                    <input type="number" name="guess" value={guess} onChange={e => handleGuessInput(e)} placeholder="Guess"></input>    
                 </div>
                 <Button variant="contained" color="primary" id="guess-button" onClick={() => processGuessSubmit(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</Button>
                 <Button variant="contained" color="primary" id="giveup-button" onClick={() => processGiveUp()} disabled={(year === "" || loaded===true) || disable===true}>Give Up</Button> 

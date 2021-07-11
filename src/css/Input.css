@@ -1,3 +1,9 @@
+input{
+    padding: 1.2em 0;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
 .year-input{
     text-align: center;
     display:flex;

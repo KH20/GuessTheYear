@@ -7,6 +7,7 @@
 
 #guess-button{
     background-color: orange;
+    margin-left:1em;
 }
 
 #buttonContainer{
@@ -16,10 +17,6 @@
     flex-wrap: wrap;
 }
 
-button:disabled{
-    background-color: rgba(0, 0, 0, 0.12) !important;
-}
-
 .clueButton{
     background-color: #1D3557 !important;
     margin-left: 1em !important;
@@ -27,7 +24,11 @@ button:disabled{
 }
 
 #submit-button{
-    background-color: #1D3557 !important;
+    background-color: #1D3557;
     margin-left: 1em !important;
     padding: 1em !important;
+}
+
+button:disabled{
+    background-color: rgba(0, 0, 0, 0.12) !important;
 }
