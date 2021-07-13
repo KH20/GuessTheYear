@@ -15,7 +15,7 @@ let globalOptions =  {
     },
     position:"top-right",
     labels:{
-        alert: "Error"
+        alert: "Incorrect"
     }
 };  
 
@@ -269,7 +269,7 @@ function Input(props) {
             setDisable(true);
         }
         else{
-            notifier.alert("Incorrect :(");
+            notifier.alert(":(");
         }
     }
 
