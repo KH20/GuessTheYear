@@ -99,6 +99,7 @@ function Input(props) {
         "2019"
       ];
       const [minimumYear, setMinimumYear] = useState(years[0]);
+      const [maximumYear, setMaximumYear] = useState(years[years.length - 1]);
     
 
     const getMusic = async(year) =>{
@@ -226,8 +227,8 @@ function Input(props) {
     const randYearGen = () => {
         let rand = 0;
         let minYear = years.indexOf(minimumYear);
-        rand = Math.floor(Math.random() * (years.length - minYear) + minYear);
-        console.log(years[rand]);
+        let maxYear = years.indexOf(maximumYear);
+        rand = Math.floor(Math.random() * (maxYear - minYear) + minYear) + 1;
         return years[rand];
     }
 
@@ -354,7 +355,7 @@ function Input(props) {
 
     return(
         <div>
-            <Modal minimumYear={minimumYear} setMinimumYear={setMinimumYear}></Modal>
+            <Modal minimumYear={minimumYear} setMinimumYear={setMinimumYear} maximumYear={maximumYear} setMaximumYear={setMaximumYear}></Modal>
             <div className="year-input">
                 <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
                     <input type="number" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input> 

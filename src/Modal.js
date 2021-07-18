@@ -29,6 +29,7 @@ export default function TransitionsModal(props) {
   const [open, setOpen] = React.useState(false);
   const [tutorialOpen, setTutorialOpen] = React.useState(false);
   const {setMinimumYear} = props;
+  const {setMaximumYear} = props;
 
   const handleOpen = () => {
     setOpen(true);
@@ -48,8 +49,13 @@ export default function TransitionsModal(props) {
 
   const saveSettings = () => {
     let minYear = document.getElementById("lowerLimit").value;
-    setMinimumYear(minYear);
+    let maxYear = document.getElementById("upperLimit").value;
+    if(minYear != "")
+      setMinimumYear(minYear);
+    if(maxYear != "")
+      setMaximumYear(maxYear);
     console.log(minYear);
+    console.log(maxYear);
     setOpen(false);
   }
 
