@@ -1,5 +1,5 @@
 input{
-    padding: 1.2em 0;
+    padding: 1.2em 1em;
     border-radius: 0.5em;
     text-align: center;
 }
@@ -144,7 +144,7 @@ label{
 }
 
 Modal{
-    max-width: 50%;
+    max-width: 60%;
     max-height: 75%;
 }
 
