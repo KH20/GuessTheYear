@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import Loader from 'react-loader-spinner';
+import Modal from "./Modal.js";
+import Button from '@material-ui/core/Button';
 import "./css/Input.css";
 import "./css/style.css";
 import jsonData from "./data/jsonData.json";
@@ -13,9 +15,9 @@ let globalOptions =  {
     },
     position:"top-right",
     labels:{
-        alert: "Error"
+        alert: "Incorrect"
     }
-};
+};  
 
 let inputErr =  {
     durations:{
@@ -44,7 +46,6 @@ function Input(props) {
     const [disable, setDisable] = useState(false);
     const [loadingStatus, setLoadingStatus] = useState("");
     const [win, setWin] = useState(false);
-    const [showOptions, setShowOptions] = useState(false);
     const years = [
         "1970",
         "1971",
@@ -97,9 +98,11 @@ function Input(props) {
         "2018",
         "2019"
       ];
-    const [minimumYear, setMinimumYear] = useState(years[0]);
+      const [minimumYear, setMinimumYear] = useState(years[0]);
+      const [maximumYear, setMaximumYear] = useState(years[years.length - 1]);
+    
 
-    const getMusic = async(year, musicType) =>{
+    const getMusic = async(year) =>{
         const data = await jsonData[year].music;
         return data;
     }
@@ -122,24 +125,20 @@ function Input(props) {
     const populateMusic = async (year) =>{
         setLoadingStatus("Populating Music...");
 
-        const filters = document.querySelector("input[name='music-type']:checked");
-        const filter = filters.value;
-        console.log("FILTER: " + filter);
-        var data = localStorage.getItem("music_" + filter + "_" + year);
+        var data = localStorage.getItem("music_" + year);
 
         if(data === null || data === ""){
             console.log("Data was null");
-            data = await getMusic(year, filter);
+            data = await getMusic(year);
 
             for(let i=0; i<data.length;i++){
                 let song = data[i][0];
                 let artist = data[i][1];
-                let artistSong = artist + " - " + song;
-                if(!musicList.includes(artistSong))
-                    musicList.push(artistSong);
+                // let artistSong = artist + " - " + song;
+                let musicClue = {"artist":artist, "title":song}
+                musicList.push(musicClue);
             }
-            console.log("STATE: " + filter);
-            localStorage.setItem("music_" + filter + "_" + year, musicList);
+            // localStorage.setItem("music_" + filter + "_" + year, musicList);
             setMusicList(musicList);
         }
         else{
@@ -163,7 +162,7 @@ function Input(props) {
                 let title = data[i];
                 movieList.push(title);
             }
-            localStorage.setItem("movies_" + year, movieList);
+            // localStorage.setItem("movies_" + year, movieList);
             setMovieList(movieList);
         }
         else{
@@ -187,7 +186,7 @@ function Input(props) {
                 let title = data[i];
                 gameList.push(title);
             }
-            localStorage.setItem("games_" + year, gameList);
+            // localStorage.setItem("games_" + year, gameList);
             setGameList(gameList);
         }
         else{
@@ -212,7 +211,7 @@ function Input(props) {
                 let title = data[i];
                 eventList.push(title);
             }
-            localStorage.setItem("events_" + year, eventList);
+            // localStorage.setItem("events_" + year, eventList);
             setEventList(eventList);
         }
         else{
@@ -227,9 +226,9 @@ function Input(props) {
 
     const randYearGen = () => {
         let rand = 0;
-        while(parseInt(years[rand]) < parseInt(minimumYear))            //This is dirty as hell and needs revising todo
-            rand = Math.floor(Math.random() * 51);
-        console.log(years[rand]);
+        let minYear = years.indexOf(minimumYear);
+        let maxYear = years.indexOf(maximumYear);
+        rand = Math.floor(Math.random() * (maxYear - minYear) + minYear) + 1;
         return years[rand];
     }
 
@@ -271,7 +270,7 @@ function Input(props) {
             setDisable(true);
         }
         else{
-            notifier.alert("Incorrect :(");
+            notifier.alert(":(");
         }
     }
 
@@ -331,16 +330,6 @@ function Input(props) {
         });
     }
 
-    const showGenreOptionsTooltip = () => {
-        tippy('.genre-options-input', {
-            content: "Genre options have been disabled temporarily",
-            hideOnClick: false,
-            duration:[100,250],
-            trigger: "mouseenter",
-            placement: "bottom"
-        });
-    }
-
     const checkInputIsNumber = (e) => {
         //Check if last entered key is not a number.
         //Guards against index reference error when backspace is entered
@@ -364,49 +353,17 @@ function Input(props) {
         setInput(e.target.value)
     }
 
-    const showOptionsMenu = () => {
-        if(showOptions === false){
-            setShowOptions(true);
-        }
-        else{
-            setShowOptions(false);
-        }
-    }
-
-    const saveMinYearOption = () => {
-        let min = document.getElementById("minYear").value;
-        setMinimumYear(min);
-        console.log(minimumYear);
-        setShowOptions(false);
-    }
-
     return(
         <div>
-            {showOptions === true ? 
-                <div id="optionsDisplay">
-                    <button class="optionButton" id="closeOptions" onClick={showOptionsMenu}>X</button>
-                    <button class="optionButton" id="saveOptions" onClick={saveMinYearOption}>Save</button>
-                    <div>Lowest Year: <input id="minYear" name="minyear"></input></div>
-                </div>
-                :<div></div>
-            }
-            <button id="options" onClick={showOptionsMenu}><i class="fas fa-cog" id="options-icon"></i></button>
+            <Modal minimumYear={minimumYear} setMinimumYear={setMinimumYear} maximumYear={maximumYear} setMaximumYear={setMaximumYear}></Modal>
             <div className="year-input">
                 <div className="year-input-content" onMouseEnter={showYearInputToolTip}>
-                    <input type="text" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input>
-                    <button id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</button>  
+                    <input type="number" name="year" value={input} onChange={e => handleYearInput(e)} placeholder="Year" ></input> 
                 </div>
+                <Button variant="contained" color="primary" id="submit-button" onClick={handleYearSubmit} disabled={year !== "" && loaded!==true}>Get Clues!</Button> 
             </div>
             <br/>
-            <div id="genre-options" onMouseEnter={showGenreOptionsTooltip}>
-                <div className="genre-options-input">
-                    <input type="radio" id="" name="music-type" value="" defaultChecked/><label for="">All</label>
-                    <input type="radio" id="rock" name="music-type" value="rock" disabled/><label for="rock">Rock</label>
-                    <input type="radio" id="hard rock" name="music-type" value="hard rock" disabled/><label for="hard rock">Hard Rock</label>
-                    <input type="radio" id="pop" name="music-type" value="pop" disabled/><label for="pop">Pop</label>
-                    <input type="radio" id="metal" name="music-type" value="metal" disabled/><label for="metal">Metal</label>
-                </div>
-            </div>
+
             {loaded === true ?
             <div className="loading-overlay">
                 {loaded && <Loader type="TailSpin" color="#1D3557"/>}
@@ -416,13 +373,10 @@ function Input(props) {
             {giveUp === true ? <div className="giveup-banner">The Year was: {year}<p><button onClick={playAgain}>Play Again</button><button onClick={close}>Close</button></p></div> : ""}
             <div className="guess-input">
                 <div className="guess-input-content" onMouseEnter={showGuessInputTooltip}>
-                    <input type="text" name="guess" value={guess} onChange={e => handleGuessInput(e)} placeholder="Guess"></input>
-                    <button id="guess-button" onClick={() => processGuessSubmit(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</button>      
+                    <input type="number" name="guess" value={guess} onChange={e => handleGuessInput(e)} placeholder="Guess"></input>    
                 </div>
-                <div id="giveup-div">
-                    <button id="giveup-button" onClick={() => processGiveUp()} disabled={(year === "" || loaded===true) || disable===true}>Give Up</button> 
-                </div>
-                
+                <Button variant="contained" color="primary" id="guess-button" onClick={() => processGuessSubmit(guess, year)} disabled={(year === "" || loaded===true) || disable===true}>Submit</Button>
+                <Button variant="contained" color="primary" id="giveup-button" onClick={() => processGiveUp()} disabled={(year === "" || loaded===true) || disable===true}>Give Up</Button> 
             </div>
         </div>
     ) 
