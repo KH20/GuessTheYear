@@ -2,9 +2,20 @@
     margin-top: 2em;
     display:flex;
     flex-wrap: wrap;
-    text-align: center;
     justify-content: center;
     color:white;
+}
+
+.section-header{
+    text-align: center;
+}
+
+.carousel{
+    max-width: 1200px;
+}
+
+.carousel .slide{
+    text-align: left !important;
 }
 
 .music{
@@ -86,21 +97,6 @@
     box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
 }
 
-.clue{
-    background-color: #A31420;
-    border-radius: 0.7em;
-    list-style: none;
-    margin-bottom:1.3em;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    margin: 1em auto;
-    -webkit-box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
-    box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
-    max-width: 14em;
-    width: 14em;
-}
-
 ol{
     text-align: center;
     padding-left: 0;
@@ -116,7 +112,7 @@ li{
     margin-right: 0.5em;
 }
 
-h2{
+.section-header{
     background-color: #1D3557;
     padding-top:1em;
     padding-bottom:1em;
@@ -130,12 +126,23 @@ a{
     color:white;
 }
 
+.MuiCardContent-root{
+    max-width:110%;
+}
+
 @media only screen and (max-width:1100px){
+
+    .carousel{
+        max-width: 1000px;
+    }
+
     .music{
         width:40%;
+        margin-top: 2em;
     }
     .movies{
         width:40%;
+        margin-top: 2em;
     }
     .games{
         width:40%;
@@ -154,21 +161,30 @@ a{
         width: 100%;
         max-width: 100%;
     }
+
+    .carousel{
+        max-width: 350px;
+    }
     
     .music{
-        width:100%;
+        width:97%;
+        margin-top: 2em;
     }
     .movies{
-        width:100%;
+        width:97%;
         margin-top:2em;
     }
     .games{
-        width:100%;
+        width:97%;
         margin-top:2em;
     }
     .events{
-        width:100%;
+        width:97%;
         margin-top:2em;
         margin-bottom:2em;
+    }
+
+    button{
+        padding:0.5em;
     }
 }

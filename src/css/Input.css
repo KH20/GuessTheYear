@@ -1,3 +1,9 @@
+input{
+    padding: 1.2em 1em;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
 .year-input{
     text-align: center;
     display:flex;
@@ -31,16 +37,6 @@
 
 #minYear{
     max-width: 4em;
-}
-
-#guess-button{
-    padding: 0.9em 1em;
-    background-color: orange;
-}
-
-#giveup-button{
-    padding: 0.9em 1em;
-    background-color: darkred;
 }
 
 #giveup-div{
@@ -113,23 +109,24 @@ input[type=text] {
     max-width: 10em;
 }
 
-#submit-button{
-    padding: 0.9em 1em;
-}
-
 label{
     color:grey;
+}
+
+#options-buttons-container{
+    display:flex;
+    margin-right:10%;
+    flex-direction: row-reverse;
 }
 
 #options-icon{
     font-size:x-large;
 }
 
-#options{
+.options-buttons{
     padding:0.5em;
     border-radius: 0.5em;
     margin-left: 1em;
-    margin-right:1em;
     background-color: #1d3557;
     color:white;
     text-align: center;
@@ -139,22 +136,16 @@ label{
     cursor: pointer;
     position: relative;
     min-width: 2em;
-    margin-left:88.5%;
+    flex-direction: column;
 }
 
-button:disabled{
-    padding:2em;
-    border-radius: 0.5em;
-    margin-left: 1em;
-    margin-right:1em;
-    background-color: grey !important;
-    color:lightgrey;
-    text-align: center;
-    transition-duration: 0.4s;
-    text-decoration: none;
-    overflow: hidden;
-    position: relative;
+#tutorial-icon{
+    font-size:x-large
+}
 
+Modal{
+    max-width: 60%;
+    max-height: 75%;
 }
 
 @media only screen and (max-width:1100px){

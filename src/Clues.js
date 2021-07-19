@@ -1,54 +1,56 @@
 import React from 'react';
 import "../src/css/Clues.css"; 
+import Clue from "./Clue.js";
+import {Carousel} from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+
+
 
 function Clues(props) {
+   
     const {knownMusicClues, knownMovieClues, knownGameClues, knownEventClues} = props;
-    console.log("CLUES COMPONENT LOADED");
+    const {activeClue} = props;
     return(
         <div className="clues">
-            <div className="music">
-                <h2 id="music-header">Music Clues</h2>
-                <div className="music-clues-container">
-                    <ol>                    
+            <Carousel swipeable={true} emulateTouch={true} autoPlay={false} showStatus={false} interval={9999999999} useKeyboardArrows={true} autoFocus={true} selectedItem={activeClue}>
+                <div className="music">
+                    <h2 id="music-header" class="section-header">Music Clues</h2>
+                    <div className="music-clues-container">
                         {knownMusicClues.map((clue, index) => (
-                            <a href={"http://www.google.com/search?q=" + clue + " youtube&btnI"} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
+                            <Clue artist={clue.artist} type="Music" title={clue.title} key={index}></Clue>
                         ))}
-                    </ol>
+                    </div>
                 </div>
-            </div>
 
-            <div className="movies">
-                <h2 id="movie-header">Movie / TV Clues</h2>
-                <div className="movie-clues-container">
-                    <ol>                    
+                <div className="movies">
+                    <h2 id="movie-header" class="section-header">Movie / TV Clues</h2>
+                    <div className="movie-clues-container">
                         {knownMovieClues.map((clue, index) => (
-                            <a href={"http://www.google.com/search?q=" + clue + " IMDB&btnI"} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
+                            <Clue title={clue} type="Movie" key={index}></Clue>
                         ))}
-                    </ol>
+                    </div>
                 </div>
-            </div>
 
-            <div className="games">
-                <h2 id="game-header">Game Clues</h2>
-                <div className="game-clues-container">
-                    <ol>                    
+                <div className="games">
+                    <h2 id="game-header" class="section-header">Game Clues</h2>
+                    <div className="game-clues-container">
                         {knownGameClues.map((clue, index) => (
-                            <a href={"http://www.google.com/search?q=" + clue + " Game&btnI"} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
+                            <Clue title={clue} type="Game" key={index}></Clue>
                         ))}
-                    </ol>
+                    </div>
                 </div>
-            </div>
 
-            <div className="events">
-                <h2 id="event-header">Event Clues</h2>
-                <div className="event-clues-container">
-                    <ol>                    
+                <div className="events">
+                    <h2 id="event-header" class="section-header">Event Clues</h2>
+                    <div className="event-clues-container">
                         {knownEventClues.map((clue, index) => (
-                            <a href={"http://www.google.com/search?q=" + clue} target="new"><div className="clue"><li key={index}>{clue}</li></div></a>
+                            <Clue title={clue} type="Event" key={index}></Clue>
                         ))}
-                    </ol>
+                    </div>
                 </div>
-            </div>
+            </Carousel>
+
         </div>
     ) 
 }
