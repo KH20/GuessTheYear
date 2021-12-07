@@ -18,6 +18,10 @@ Be warned that clicking the clue links can sometimes spoil this experience by gi
 * Ability to choose a year range. e.g. Limiting the years to 1980-2021.
 * Redesign the UI to use Material Design, and include media such as album art.
 * A change for mobile platforms where the clues can be swiped across, and scrolling will only scroll the clue frame in focus.
+* LONG TERM: User accounts and leaderboards for scores.
 
 ## Known Bugs
+* Clues currently not clickable.
+* Mobile View redesign needed.
+
 Please let me know of any bugs!
