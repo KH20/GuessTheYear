@@ -2,11 +2,11 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-currentYear = 2021  #Enter current year
-year = 1930         #Enter the year from which to start scraping
+currentYear = 2022  #Enter current year
+year = 2021         #Enter the year from which to start scraping
 
 while year < currentYear:
-    url = "https://www.onthisday.com/date/" + str(year)    #Enter where to scrape from
+    url = "https://www.imdb.com/search/title/?title_type=video_game&release_date=" + str(year) + "-01-01," + str(year) + "2021-12-31&sort=num_votes,desc"   #Enter where to scrape from
 
     source = requests.get(url).text
     soup = BeautifulSoup(source, 'lxml')
