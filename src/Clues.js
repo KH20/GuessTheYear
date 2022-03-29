@@ -16,6 +16,7 @@ function Clues(props) {
         <div className="clues">
             <Carousel
                 swipeable={true}
+                swipeScrollTolerance={40}
                 emulateTouch={true}
                 autoPlay={false}
                 showStatus={false}

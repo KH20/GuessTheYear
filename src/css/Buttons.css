@@ -1,34 +1,34 @@
-
-
-#giveup-button{
+#giveup-button {
     background-color: darkred;
-    margin-left:1em;
+    margin-left: 1em;
 }
 
-#guess-button{
+#guess-button {
     background-color: orange;
-    margin-left:1em;
+    margin-left: 1em;
 }
 
-#buttonContainer{
-    margin-top:1em;
-    display:flex;
+#buttonContainer {
+    margin-top: 1em;
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    column-gap: 50px;
+    row-gap: 10px;
 }
 
-.clueButton{
-    background-color: #1D3557 !important;
+.clueButton {
+    background-color: #1d3557 !important;
     margin-left: 1em !important;
     padding: 1em !important;
 }
 
-#submit-button{
-    background-color: #1D3557;
+#submit-button {
+    background-color: #1d3557;
     margin-left: 1em !important;
     padding: 1em !important;
 }
 
-button:disabled{
+button:disabled {
     background-color: rgba(0, 0, 0, 0.12) !important;
 }
