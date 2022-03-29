@@ -1,71 +1,55 @@
-input{
+input {
     padding: 1.2em 1em;
     border-radius: 0.5em;
     text-align: center;
 }
 
-.year-input{
+.year-input {
     text-align: center;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
-#genre-options{
+#genre-options {
     text-align: center;
     justify-content: center;
     display: flex;
 }
-#optionsDisplay{
+#optionsDisplay {
     background-color: white;
     align-content: center;
     z-index: 1;
 }
 
-.optionButton{
-    padding:0 !important;
+.optionButton {
+    padding: 0 !important;
     min-width: 3em !important;
     float: right;
 }
 
-#closeOptions{
+#closeOptions {
     background-color: red;
 }
 
-#saveOptions{
+#saveOptions {
     background-color: green;
 }
 
-#minYear{
+#minYear {
     max-width: 4em;
 }
 
-#giveup-div{
+#giveup-div {
     display: flex;
     align-items: center;
 }
 
-.guess-input{
-    display:flex;
+.guess-input {
+    display: flex;
     justify-content: center;
 }
 
-.loading-overlay{
-    position: absolute;
-    display: inline-block;
-    margin: 0 auto;
-    margin-top: 0px;
-    margin-left: auto;
-    z-index: 1;
-    width: 50%;
-    margin-top: 20em;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);;
-    padding: 4em 0em;
-    margin-left: 25%;
-    min-width: 40%;
-}
-
-.win-banner{
+.loading-overlay {
     position: absolute;
     display: inline-block;
     margin: 0 auto;
@@ -81,7 +65,7 @@ input{
     min-width: 40%;
 }
 
-.giveup-banner{
+.win-banner {
     position: absolute;
     display: inline-block;
     margin: 0 auto;
@@ -97,11 +81,27 @@ input{
     min-width: 40%;
 }
 
-.loading-status{
-    margin-top:1em;
+.giveup-banner {
+    position: absolute;
+    display: inline-block;
+    margin: 0 auto;
+    margin-top: 0px;
+    margin-left: auto;
+    z-index: 1;
+    width: 50%;
+    margin-top: 20em;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 4em 0em;
+    margin-left: 25%;
+    min-width: 40%;
 }
 
-input[type=text] {
+.loading-status {
+    margin-top: 1em;
+}
+
+input[type="text"] {
     padding: 12px 20px;
     margin: 0.5em 1em;
     box-sizing: border-box;
@@ -109,26 +109,26 @@ input[type=text] {
     max-width: 10em;
 }
 
-label{
-    color:grey;
+label {
+    color: grey;
 }
 
-#options-buttons-container{
-    display:flex;
-    margin-right:10%;
+#options-buttons-container {
+    display: flex;
+    margin-right: 10%;
     flex-direction: row-reverse;
 }
 
-#options-icon{
-    font-size:x-large;
+#options-icon {
+    font-size: x-large;
 }
 
-.options-buttons{
-    padding:0.5em;
+.options-buttons {
+    padding: 0.5em;
     border-radius: 0.5em;
     margin-left: 1em;
     background-color: #1d3557;
-    color:white;
+    color: white;
     text-align: center;
     transition-duration: 0.4s;
     text-decoration: none;
@@ -139,24 +139,45 @@ label{
     flex-direction: column;
 }
 
-#tutorial-icon{
-    font-size:x-large
+#tutorial-icon {
+    font-size: x-large;
 }
 
-Modal{
+Modal {
     max-width: 60%;
     max-height: 75%;
 }
 
-@media only screen and (max-width:1100px){
-    .loading-overlay{
-        margin-top:30em;
+@media only screen and (max-width: 1100px) {
+    .loading-overlay {
+        margin-top: 30em;
     }
-    
 }
 
-@media only screen and (max-width:550px){
-    .loading-overlay{
-        margin-top:5em;
+@media only screen and (max-width: 810px) {
+    .loading-overlay {
+        margin-top: 5em;
+    }
+
+    #options-buttons-container {
+        display: flex;
+        margin-right: 10%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        flex-direction: row-reverse;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .loading-overlay {
+        margin-top: 5em;
+    }
+
+    #options-buttons-container {
+        display: flex;
+        margin-right: 10%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        flex-direction: row-reverse;
     }
 }
