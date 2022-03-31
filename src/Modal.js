@@ -100,7 +100,7 @@ export default function TransitionsModal(props) {
                                 id="lowerLimit"
                                 type="number"
                                 min="1970"
-                                max="2019"
+                                max="2021"
                                 size="10"
                                 placeholder="Lower Limit"
                             ></input>{" "}
@@ -109,7 +109,7 @@ export default function TransitionsModal(props) {
                                 id="upperLimit"
                                 type="number"
                                 min="1970"
-                                max="2019"
+                                max="2021"
                                 size="10"
                                 placeholder="Upper Limit"
                             ></input>

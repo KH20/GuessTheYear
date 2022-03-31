@@ -97,6 +97,8 @@ function Input(props) {
         "2017",
         "2018",
         "2019",
+        "2020",
+        "2021",
     ];
     const [minimumYear, setMinimumYear] = useState(years[0]);
     const [maximumYear, setMaximumYear] = useState(years[years.length - 1]);

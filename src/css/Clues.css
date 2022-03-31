@@ -1,190 +1,194 @@
-.clues{
+.clues {
     margin-top: 2em;
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    color:white;
+    color: white;
 }
 
-.section-header{
+.section-header {
     text-align: center;
 }
 
-.carousel{
+.carousel {
     max-width: 1200px;
 }
 
-.carousel .slide{
+.carousel .slide {
     text-align: left !important;
 }
 
-.music{
+.music {
     min-width: 18em;
-    margin-left:0.5em;
-    margin-right:0.5em;
-}
-
-.movies{
-    min-width: 18em;
-    margin-left:0.5em;
-    margin-right:0.5em;
-    height: 100%;
-}
-
-.games{
-    min-width: 18em;
-    margin-left:0.5em;
-    margin-right:0.5em;
-    height: 100%;
-}
-
-.events{
-    min-width: 18em;
-    margin-left:0.5em;
-    margin-right:0.5em;
-    height: 100%;
-}
-
-.music-clues-container{
-    background-color: #457B9D;
-    min-width: 100%;
-    margin-left:0;
-    margin-right:0;
-    flex-wrap: wrap;
-    padding-top:0.01em;
-    padding-bottom:0.01em;
-    border-bottom-left-radius:1em;
-    border-bottom-right-radius:1em;
-    box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
-}
-
-.movie-clues-container{
-    background-color: #457B9D;
-    min-width: 100%;
-    margin-left:0;
-    margin-right:0;
-    flex-wrap: wrap;
-    padding-top:0.01em;
-    padding-bottom:0.01em;
-    border-bottom-left-radius:1em;
-    border-bottom-right-radius:1em;
-    box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
-}
-
-.game-clues-container{
-    background-color: #457B9D;
-    min-width: 100%;
-    margin-left:0;
-    margin-right:0;
-    flex-wrap: wrap;
-    padding-top:0.01em;
-    padding-bottom:0.01em;
-    border-bottom-left-radius:1em;
-    border-bottom-right-radius:1em;
-    box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
-}
-
-.event-clues-container{
-    background-color: #457B9D;
-    min-width: 100%;
-    margin-left:0;
-    margin-right:0;
-    flex-wrap: wrap;
-    padding-top:0.01em;
-    padding-bottom:0.01em;
-    border-bottom-left-radius:1em;
-    border-bottom-right-radius:1em;
-    box-shadow: 0px 21px 12px -15px rgba(0,0,0,0.66);
-}
-
-ol{
-    text-align: center;
-    padding-left: 0;
-    margin-left: 2em;
-    margin-right: 2em;
-    margin-bottom:0;
-    margin-top:0;
-    padding-top:0;
-}
-
-li{
     margin-left: 0.5em;
     margin-right: 0.5em;
 }
 
-.section-header{
-    background-color: #1D3557;
-    padding-top:1em;
-    padding-bottom:1em;
-    margin:0;
-    border-top-left-radius:1em;
-    border-top-right-radius:1em;
+.movies {
+    min-width: 18em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    height: 100%;
 }
 
-a{
+.games {
+    min-width: 18em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    height: 100%;
+}
+
+.events {
+    min-width: 18em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    height: 100%;
+}
+
+.music-clues-container {
+    background-color: #457b9d;
+    min-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    flex-wrap: wrap;
+    padding-top: 0.01em;
+    padding-bottom: 0.01em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    box-shadow: 0px 21px 12px -15px rgba(0, 0, 0, 0.66);
+}
+
+.movie-clues-container {
+    background-color: #457b9d;
+    min-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    flex-wrap: wrap;
+    padding-top: 0.01em;
+    padding-bottom: 0.01em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    box-shadow: 0px 21px 12px -15px rgba(0, 0, 0, 0.66);
+}
+
+.game-clues-container {
+    background-color: #457b9d;
+    min-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    flex-wrap: wrap;
+    padding-top: 0.01em;
+    padding-bottom: 0.01em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    box-shadow: 0px 21px 12px -15px rgba(0, 0, 0, 0.66);
+}
+
+.event-clues-container {
+    background-color: #457b9d;
+    min-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    flex-wrap: wrap;
+    padding-top: 0.01em;
+    padding-bottom: 0.01em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    box-shadow: 0px 21px 12px -15px rgba(0, 0, 0, 0.66);
+}
+
+ol {
+    text-align: center;
+    padding-left: 0;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+li {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.section-header {
+    background-color: #1d3557;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin: 0;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+a {
     text-decoration: none;
-    color:white;
+    color: white;
 }
 
-.MuiCardContent-root{
-    max-width:110%;
+.MuiCardContent-root {
+    max-width: 110%;
 }
 
-@media only screen and (max-width:1100px){
-
-    .carousel{
-        max-width: 1000px;
+@media only screen and (max-width: 1100px) {
+    .carousel {
+        max-width: 800px;
     }
 
-    .music{
-        width:40%;
+    .music {
         margin-top: 2em;
     }
-    .movies{
-        width:40%;
+    .movies {
         margin-top: 2em;
     }
-    .games{
-        width:40%;
-        margin-top:2em;
+    .games {
+        margin-top: 2em;
     }
-    .events{
-        width:40%;
-        margin-top:2em;
+    .events {
+        margin-top: 2em;
     }
-    
 }
 
-@media only screen and (max-width:550px){
+@media only screen and (max-width: 800px) {
+    .carousel {
+        max-width: 600px;
+    }
 
-    .clue{
+    .clue {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .clue {
         width: 100%;
         max-width: 100%;
     }
 
-    .carousel{
+    .carousel {
         max-width: 350px;
     }
-    
-    .music{
-        width:97%;
+
+    .music {
+        width: 97%;
         margin-top: 2em;
     }
-    .movies{
-        width:97%;
-        margin-top:2em;
+    .movies {
+        width: 97%;
+        margin-top: 2em;
     }
-    .games{
-        width:97%;
-        margin-top:2em;
+    .games {
+        width: 97%;
+        margin-top: 2em;
     }
-    .events{
-        width:97%;
-        margin-top:2em;
-        margin-bottom:2em;
+    .events {
+        width: 97%;
+        margin-top: 2em;
+        margin-bottom: 2em;
     }
 
-    button{
-        padding:0.5em;
+    button {
+        padding: 0.5em;
     }
 }
