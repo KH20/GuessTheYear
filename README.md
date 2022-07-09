@@ -21,7 +21,5 @@ Be warned that clicking the clue links can sometimes spoil this experience by gi
 * LONG TERM: User accounts and leaderboards for scores.
 
 ## Known Bugs
-* Clues currently not clickable. FIXED
-* Mobile View redesign needed.
-
+None
 Please let me know of any bugs!
