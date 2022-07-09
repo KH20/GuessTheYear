@@ -15,13 +15,13 @@ Be warned that clicking the clue links can sometimes spoil this experience by gi
 
 ## Upcoming Updates
 * Feedback on how far away from the correct year your guess is - if feedback mode is enabled.
-* Ability to choose a year range. e.g. Limiting the years to 1980-2021.
+* Ability to choose a year range. e.g. Limiting the years to 1980-2021. :white_check_mark:
 * Redesign the UI to use Material Design, and include media such as album art.
-* A change for mobile platforms where the clues can be swiped across, and scrolling will only scroll the clue frame in focus.
+* A change for mobile platforms where the clues can be swiped across, and scrolling will only scroll the clue frame in focus. :white_check_mark:
 * LONG TERM: User accounts and leaderboards for scores.
 
 ## Known Bugs
-* Clues currently not clickable.
+* Clues currently not clickable. FIXED
 * Mobile View redesign needed.
 
 Please let me know of any bugs!
